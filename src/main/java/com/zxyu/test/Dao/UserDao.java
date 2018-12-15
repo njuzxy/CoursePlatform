@@ -5,5 +5,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface UserDao {
-    public void addUser(UserEntity userEntity);
+     void addUser(UserEntity userEntity);
+
+     void removeUser(String email);
+
+     void updateUser(UserEntity userEntity);
+
+     UserEntity findUser(String email);
+
+
 }
