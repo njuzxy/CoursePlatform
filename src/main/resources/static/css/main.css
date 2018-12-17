@@ -1,6 +1,6 @@
 /*******************************************************/
 .background {
-    width: 1440px;
+    /*width: 1440px;*/
     /*height: 1080px;*/
     /*line-height: 50px;*/
     text-align: center;
@@ -11,7 +11,7 @@
     background-size: contain;
     /*使用cover的意思是把背景图片充满整个容器，而不考虑是不是可以看到完整的图片；*/
     /*使用contain的意思是在容器里完整显示图片，而不考虑容器是否被填满。*/
-    width: 1440px;
+    /*width: 1440px;*/
     height: 1080px;
     content: "";
     position: absolute;
@@ -27,7 +27,7 @@
 }
 
 .background-content {
-    width: 1440px;
+    /*width: 1440px;*/
     /*min-height: 1080px;*/
     /*height: 1080px;*/
     /*line-height: 50px;*/
