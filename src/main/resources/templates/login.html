@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="/public/jquery/jquery.min.js"></script>
+    <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel="icon" href="/image/favicon.ico" />
+
+</head>
+<body>
+<div class="background">
+    <div class="container">
+        <form class="form-class" id="form-signInUp" method="post">
+            <h2 class="form-class-heading">Please sign in</h2>
+            <label class="sr-only">Username</label>
+            <input type="text" name="email" id="email" class="form-control" placeholder="Username" required
+                   autofocus>
+            <label class="sr-only">Password</label>
+            <input type="password" name="pwd" id="password" class="form-control" placeholder="Password" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <input class="btn btn-lg btn-primary btn-block" id="btn-signIn" type="submit" value="Sign in">
+            <a href="/register" class="a-signUp">Have no account? Sign up>>></a>
+        </form>
+    </div>
+
+    <script type="text/javascript">
+
+
+    </script>
+</div>
+</div>
+</body>
+</html>

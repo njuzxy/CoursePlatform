@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Register</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="/public/jquery/jquery.min.js"></script>
+    <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel="icon" href="/image/favicon.ico" />
+
+</head>
+<body>
+<div class="background">
+    <div class="container">
+        <form class="form-class" id="form-signInUp" method="post">
+            <h2 class="form-class-heading">Please sign up</h2>
+
+            <div id="div-signUpMember">
+                <label class="sr-only">Email</label>
+                <input type="email" id="email" name="email" class="form-control" placeholder="Email" required autofocus>
+                <p></p>
+                <label class="sr-only">Username</label>
+                <input type="text" id="nickname" name="nickname" class="form-control" placeholder="Nickname" required>
+                <label  class="sr-only">Password</label>
+                <input type="password" id="password" name="pwd1" class="form-control" placeholder="Password" required>
+                <label  class="sr-only">Password Again</label>
+                <input type="password" id="passwordAgain" name="pwd2" class="form-control" placeholder="Password Again" required>
+            </div>
+
+            <input class="btn btn-lg btn-primary btn-block" id="btn-signUp" type="submit" value="Sign Up">
+            <a href="/login" class="a-signUp">Already have account? Sign in>>></a>
+        </form>
+
+    </div>
+
+</div>
+</div>
+
+<script type="text/javascript">
+</script>
+
+</body>
+</html>

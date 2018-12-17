@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Welcome</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="/public/jquery/jquery.min.js"></script>
+    <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/css/main.css'/>
+    <link rel="icon" href="/image/favicon.ico" />
+
+</head>
+<body>
+
+<p th:text="'Hello, ' + ${title}" /><br/>
+
+<div class="background">
+    <div class="container">
+        <div class="content">
+            <h1 id="h1-welcome">Welcome to Course Platform.</h1>
+            <p id="btn-choose-signInAndUp">
+                <a href="/login" class="btn btn-primary">Login.</a>&nbsp;&nbsp;&nbsp;
+                <a href="/register" class="btn btn-primary">Register.</a>
+            </p></div>
+    </div>
+</div>
+</body>
+</html>
