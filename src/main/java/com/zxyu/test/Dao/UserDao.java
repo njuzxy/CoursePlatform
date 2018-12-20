@@ -1,5 +1,7 @@
 package com.zxyu.test.Dao;
 
+import com.zxyu.test.Entity.AssignmentEntity;
+import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
 import org.springframework.stereotype.Component;
 
@@ -7,11 +9,18 @@ import org.springframework.stereotype.Component;
 public interface UserDao {
      void addUser(UserEntity userEntity);
 
-     void removeUser(String email);
+     void removeUser(String sid);
 
      void updateUser(UserEntity userEntity);
 
-     UserEntity findUser(String email);
+     UserEntity findUser(String sid);
 
+     void addSubmit(SubmitEntity submitEntity);
+
+     void updateSubmit(SubmitEntity submitEntity);
+
+     SubmitEntity findSubmit(String sid,int aid);
+
+     void addAssignment(AssignmentEntity assignmentEntity);
 
 }

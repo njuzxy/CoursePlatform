@@ -109,7 +109,7 @@ public class MainController {
         PrintWriter out = null;
 
         UserEntity user=new UserEntity();
-        user.setEmail(email);
+        //user.setEmail(email);
         user.setPassword(pwd1);
         user.setSid("");
         user.setUsername(nickname);

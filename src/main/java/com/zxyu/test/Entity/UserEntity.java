@@ -8,18 +8,12 @@ import java.io.Serializable;
 public class UserEntity implements Serializable {
     private static final long serialVersionUID = -3258839839160856613L;
     @Id
-    private String email;
+    private String sid;
     private String username;
     private String password;
-    private String sid;
 
-    public String getEmail() {
-        return email;
-    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+
 
     public String getUsername() {
         return username;
