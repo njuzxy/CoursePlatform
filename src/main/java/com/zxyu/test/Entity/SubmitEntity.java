@@ -6,6 +6,8 @@ import org.springframework.data.mongodb.core.index.CompoundIndexes;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
+import java.util.Date;
+
 @Document(collection = "a_submit")
 @CompoundIndexes({
         @CompoundIndex(name = "submitIndex",def = "{'sid':1,'aid':1}")
@@ -20,6 +22,17 @@ public class SubmitEntity implements Serializable {
     private String type;
     private String run_score;
     private String quality_score;
+    private Date time;
+
+
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
+    }
 
     public String getSid() {
         return sid;
