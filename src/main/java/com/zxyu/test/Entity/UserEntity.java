@@ -13,7 +13,11 @@ public class UserEntity implements Serializable {
     private String password;
 
 
-
+    public UserEntity(String sid, String username, String password) {
+        this.sid = sid;
+        this.username = username;
+        this.password = password;
+    }
 
     public String getUsername() {
         return username;

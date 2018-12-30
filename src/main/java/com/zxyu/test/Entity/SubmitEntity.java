@@ -25,6 +25,17 @@ public class SubmitEntity implements Serializable {
     private Date time;
 
 
+    public SubmitEntity(String sid, int aid, String language, String state, String file, String type, String run_score, String quality_score, Date time) {
+        this.sid = sid;
+        this.aid = aid;
+        this.language = language;
+        this.state = state;
+        this.file = file;
+        this.type = type;
+        this.run_score = run_score;
+        this.quality_score = quality_score;
+        this.time = time;
+    }
 
     public Date getTime() {
         return time;

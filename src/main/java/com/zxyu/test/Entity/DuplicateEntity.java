@@ -17,6 +17,13 @@ public class DuplicateEntity implements Serializable {
     private String similar_sid;
     private double s_percent;
 
+    public DuplicateEntity(int aid, String sid, String similar_sid, double s_percent) {
+        this.aid = aid;
+        this.sid = sid;
+        this.similar_sid = similar_sid;
+        this.s_percent = s_percent;
+    }
+
     public int getAid() {
         return aid;
     }
