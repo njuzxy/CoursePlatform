@@ -1,0 +1,139 @@
+body {
+    background-color: #ffffff;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron {
+    /*padding-top: 6rem;*/
+    /*padding-bottom: 6rem;*/
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    background-color: #ffffff;
+}
+
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.jumbotron-heading {
+    font-weight: 300;
+}
+
+.jumbotron .container {
+    max-width: 40rem;
+}
+
+
+
+.album {
+    min-height: 50rem; /* Can be removed; just added for demo purposes */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#btn-chooseTab a {
+    min-width: 150px;
+    border-radius: 10px;
+}
+
+/**************************card**************************/
+.card {
+    /*max-width: 300px;*/
+    min-width: 200px;
+    min-height: 60px;
+    padding: 0.75rem;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    border: 0px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #888888;
+    background-color: #ffffff;
+}
+
+.card a {
+    border-radius: 5px;
+    font-size: 20px;
+    color: #2b2b2b;
+}
+
+.div-img {
+    max-width: 180px;
+    position: absolute;
+    /*float: left;*/
+}
+
+.div-table {
+    max-width: 200px;
+    position: absolute;
+    top: 20px;
+    left: 200px;
+}
+
+/***************************跑马灯*******************************/
+.carousel {
+    max-width: 600px;
+    min-width: 600px;
+    margin: 50px auto 50px;
+}
+
+.w-100 {
+    max-width: 600px;
+    max-height: 400px;
+}
+
+/*********************showHomepage**************************/
+
+.card-name {
+    font-size: 21px;
+    color: #0069d9;
+}
+
+.span-price {
+    font-size: 20px;
+    color: #cc5500;
+}
+
+.container-card {
+    text-align: center;
+    /*margin-left: 250px;*/
+    margin-top: 20px;
+}
+
+.div-chooseTab {
+    position: fixed;
+    top: 56px;
+    left: 0px;
+    z-index: 99;
+
+}
+.div-left{
+    float: left;
+}
+.div-right{
+    float: right;
+}
+
+
+.mainContent{
+    margin-top: 60px;
+    min-height: 400px;
+}
+
+.nav-item{
+    width: 250px;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0px;
+}
+.nav-link{
+    border-radius: 0px;
+    padding: 1.0rem 1rem;
+}
+.sidebar{
+    height: 900px;
+}

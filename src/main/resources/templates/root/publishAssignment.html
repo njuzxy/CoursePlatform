@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Publish assignment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="/public/jquery/jquery.min.js"></script>
+    <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel="icon" href="/image/favicon.ico"/>
+    <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/style.css">
+    <link rel='stylesheet' href="/css/root.css">
+
+</head>
+<body>
+<div class="background-content">
+    <!--<div class="header" th:fragment="header"></div>-->
+
+    <header style="position: fixed;width: 100%;top:0;z-index: 101;">
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="row">
+                <div class="col-sm-6 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">Spark Course Platform
+                    </p>
+                </div>
+                <div class="col-sm-6 py-4 user-info">
+                    <h4 class="text-white">User information</h4>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/logout" class="text-white">Log out</a>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/modifyPwd" class="text-white">Modify password</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark">
+            <div class="container d-flex justify-content-between" style="float: right">
+                <span class="navbar-brand" id="span-web">Course Platform</span>
+                <div id="logo"><a href="/"><img src="/image/favicon.ico" alt="logo" width="40"></a></div>
+                <span class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="navbar-brand" id="presentCourse">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                        aria-controls="navbarHeader"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand" id="div-ownUsername" th:text="'[Present user]&nbsp;&nbsp;' + ${sid}"></div>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mainContent">
+        <!--<div class="div-left">-->
+
+        <div class="div-chooseTab">
+            <nav class="d-none d-sm-block bg-light sidebar">
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a id="a-t1" class="nav-link active" href="/root/course">All Courses</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                </ul>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a id="a-t2" class="nav-link" href="/root/publishAssignment">Publish assignment</a>
+                    </li>
+                </ul>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a id="a-t3" class="nav-link" href="">Figure assignment</a>
+                    </li>
+                </ul>
+                <ul class="nav nav-pills flex-column">
+                    <li class="nav-item">
+                        <a id="a-t4" class="nav-link" href="">Manage users</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <!--</div>-->
+
+        <!--<div class="div-right">-->
+
+        <hr/>
+        <h3 id="h3-therterTabTitle">Publish a new assignment.</h3>
+        <hr/>
+        <div id="div1-publish-show">
+            <div>
+                <form class="form-class" id="form-publishShow" method="get">
+                    <table id="table-publish-show" cellpadding="15" cellspacing="10" rules="none">
+                        <tr>
+                            <td class="td-assignmentLeft">
+                                Title:
+                            </td>
+                            <td>
+                                <input id="input-title" type="text">
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Course type:
+                            </td>
+                            <td>
+                                <select id="select-courseType" name="select-courseType" value="">
+                                    <option value="Statistics">Statistics</option>
+                                    <option value="Cloud">Cloud</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Description:
+                            </td>
+                            <td>
+                                <textarea id="textarea-description" name="" cols="30" rows="3"></textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Deadline:
+                            </td>
+                            <td>
+                                <input id="input-deadline" type="text" placeholder="YYYY-MM-DD HH:MM:SS"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Late rule:
+                            </td>
+                            <td>
+                                <select id="select-lateTime" name="select-lateTime" value="">
+                                    <option value="24h">24h</option>
+                                    <option value="48h">48h</option>
+                                </select>
+                                <select id="select-latePercent" name="select-latePercent" value="">
+                                    <option value="90%">90%</option>
+                                    <option value="75%">75%</option>
+                                    <option value="50%">50%</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Detailed file:
+                            </td>
+                            <td>
+                                <input type="button" href="#" class="btn btn-primary" id="btn-detailedFile"
+                                       value="Choose file."
+                                       onclick=""></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Test file:
+                            </td>
+                            <td>
+                                <input type="button" href="#" class="btn btn-primary" id="btn-testFile"
+                                       value="Choose file."
+                                       onclick=""></td>
+                        </tr>
+                    </table>
+                    <input type="button" href="#" class="btn btn-primary" id="btn-confirmPublish" value="Confirm."
+                           onclick="publishAssignment();">
+                </form>
+            </div>
+        </div>
+
+        <footer class="text-muted">
+            <div class="container-footer">
+                <p>
+                    <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
+                </p>
+            </div>
+        </footer>
+    </div>
+    <!--</div>-->
+
+    <!-- /container -->
+
+</div>
+</body>
+<script type="text/javascript">
+
+    $("#a-t1").attr("class", "nav-link");
+    $("#a-t2").attr("class", "nav-link active");
+    $("#a-t3").attr("class", "nav-link");
+    $("#a-t4").attr("class", "nav-link");
+
+    $(function () {
+        $(".nav-link").click(function () {
+            $(".nav-link active").attr("class", "nav-link");
+            $(this).attr("class", "nav-link active");
+        });
+    });
+</script>
+
+<script>
+
+    function publishAssignment() {
+        var params = {};
+        //注意params.名称  名称与实体bean中名称一致
+        params.title = $("#input-title").val();
+        params.coursetype = $("#select-courseType").val();
+        params.description = $("#textarea-description").val();
+        params.deadline = $("#input-deadline").val();
+        params.latetime = $("#select-lateTime").val();
+        params.latepercent = $("#select-latePercent").val();
+
+
+        $.get("/root/publishAssignment?title=" + params.title + "&coursetype=" + params.coursetype
+            + "&description=" + params.description + "&deadline=" + params.deadline
+            + "&latetime=" + params.latetime + "&latepercent=" + params.latepercent, function (data) {
+            if (data == "Success!") {
+                alert(data);
+                window.location.href = "/root/course";
+            } else {
+                alert(data);
+            }
+        });
+    }
+
+
+</script>
+
+</html>
