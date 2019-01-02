@@ -150,8 +150,64 @@
                     </tr>
 
                 </table>
-                <input type="button" href="#" class="btn btn-primary" id="btn-addSubmit" value="Submit."
-                       onclick="">
+                <!--<input type="button" href="#" class="btn btn-primary" id="btn-addSubmit" value="Submit."-->
+                <!--onclick="">-->
+
+
+                <a id="modal-modifyPwd" href="#modal-container-modifyPwd" role="button"
+                   class="btn btn-primary"
+                   data-toggle="modal">Submit.</a>
+                <form class="form-class" id="form-publishShow" method="post"
+                      enctype="multipart/form-data" action="/student/submitAssignment">
+                    <div class="modal fade" id="modal-container-modifyPwd" role="dialog"
+                         aria-labelledby="myModalLabel"
+                         aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"
+                                            aria-hidden="true">×
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                    </h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="form-class" id="form-modifyPwd">
+                                        <h2 class="form-class-heading">Add submit</h2>
+
+                                        <table>
+                                            <tr>
+                                                <td style="min-width: 150px;">
+                                                    File type:
+                                                </td>
+                                                <td style="float: left">
+                                                    <select id="select-fileType" name="fileType" value="">
+                                                        <option value="java">java</option>
+                                                        <option value="python">python</option>
+                                                        <option value="jar">jar</option>
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    Detailed file:
+                                                </td>
+                                                <td>
+                                                    <input type="file" id="btn-submitFile"
+                                                           value="Choose file." name="submitFile"></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                    </button>
+                                    <input type="submit" class="btn btn-primary" id="btn-addSubmit" value="Submit.">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
             </div>
 
