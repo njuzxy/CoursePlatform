@@ -1,0 +1,43 @@
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="header">
+    <header style="position: fixed;width: 100%;top:0;z-index: 101;">
+        <div class="collapse bg-dark" id="navbarHeader">
+            <div class="row">
+                <div class="col-sm-6 py-4">
+                    <h4 class="text-white">About</h4>
+                    <p class="text-muted">Spark Course Platform
+                    </p>
+                </div>
+                <div class="col-sm-6 py-4 user-info">
+                    <h4 class="text-white">User information</h4>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/logout" class="text-white">Log out</a>
+                        </li>
+                    </ul>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="/modifyPwd" class="text-white">Modify password</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="navbar navbar-dark bg-dark">
+            <div class="container d-flex justify-content-between" style="float: right">
+                <span class="navbar-brand" id="span-web">Course Platform</span>
+                <div id="logo"><a href="/"><img src="/image/favicon.ico" alt="logo" width="40"></a></div>
+                <span class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                <span class="navbar-brand" id="presentCourse">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
+                        aria-controls="navbarHeader"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-brand" id="div-ownUsername" th:text="'[Present user]&nbsp;&nbsp;' + ${sid}"></div>
+                </span>
+            </div>
+        </div>
+    </header>
+</div>

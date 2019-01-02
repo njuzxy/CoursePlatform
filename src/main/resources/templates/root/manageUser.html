@@ -18,80 +18,12 @@
 </head>
 <body>
 <div class="background-content">
-    <!--<div class="header" th:fragment="header"></div>-->
-
-    <header style="position: fixed;width: 100%;top:0;z-index: 101;">
-        <div class="collapse bg-dark" id="navbarHeader">
-            <div class="row">
-                <div class="col-sm-6 py-4">
-                    <h4 class="text-white">About</h4>
-                    <p class="text-muted">Spark Course Platform
-                    </p>
-                </div>
-                <div class="col-sm-6 py-4 user-info">
-                    <h4 class="text-white">User information</h4>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="/logout" class="text-white">Log out</a>
-                        </li>
-                    </ul>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="/modifyPwd" class="text-white">Modify password</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="navbar navbar-dark bg-dark">
-            <div class="container d-flex justify-content-between" style="float: right">
-                <span class="navbar-brand" id="span-web">Course Platform</span>
-                <div id="logo"><a href="/"><img src="/image/favicon.ico" alt="logo" width="40"></a></div>
-                <span class="navbar-brand">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span class="navbar-brand" id="presentCourse">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
-                        aria-controls="navbarHeader"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-brand" id="div-ownUsername" th:text="'[Present user]&nbsp;&nbsp;' + ${sid}"></div>
-                </span>
-            </div>
-        </div>
-    </header>
+    <div class="header" th:include="/root/rHeader :: header"></div>
 
     <div class="container mainContent">
-        <!--<div class="div-left">-->
 
-        <div class="div-chooseTab">
-            <nav class="d-none d-sm-block bg-light sidebar">
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a id="a-t1" class="nav-link active" href="/root/course">All Courses</a>
-                        <span class="sr-only">(current)</span>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a id="a-t2" class="nav-link" href="">Publish assignment</a>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a id="a-t3" class="nav-link" href="">Figure assignment</a>
-                    </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                    <li class="nav-item">
-                        <a id="a-t4" class="nav-link" href="">Manage users</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        <!--</div>-->
+        <div class="left" th:include="/root/rLeft :: left"></div>
 
-        <!--<div class="div-right">-->
         <div id="div-addNewCourse">
             <button id="btn-addNewCourse"><img src="/image/addNew.png" width="25px"><span
                     style="vertical-align: bottom">&nbsp;Add new course</span></button>

@@ -46,6 +46,13 @@ public class RootController {
     }
 
 
+    @RequestMapping(value = "/manageUser", method = RequestMethod.GET)
+    public ModelAndView getManageUser() {
+        ModelAndView mv = new ModelAndView("/root/manageUser");
+        mv.addObject("sid", "root");
+        return mv;
+    }
+
     @ResponseBody
     @RequestMapping(value = "/publishAssignment", method = RequestMethod.POST)
     public void publishAssignment(@RequestParam("title") String title,
