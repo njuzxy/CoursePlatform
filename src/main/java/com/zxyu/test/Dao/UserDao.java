@@ -1,6 +1,7 @@
 package com.zxyu.test.Dao;
 
 import com.zxyu.test.Entity.AssignmentEntity;
+import com.zxyu.test.Entity.CourseEntity;
 import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
 import org.springframework.stereotype.Component;
@@ -22,5 +23,9 @@ public interface UserDao {
      SubmitEntity findSubmit(String sid,int aid);
 
      void addAssignment(AssignmentEntity assignmentEntity);
+
+     void addCourseEntity(CourseEntity courseEntity);
+
+     int findCourseNextAid();
 
 }

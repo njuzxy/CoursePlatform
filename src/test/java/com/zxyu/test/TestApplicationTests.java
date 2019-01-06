@@ -2,16 +2,14 @@ package com.zxyu.test;
 
 import com.zxyu.test.Dao.FileDao;
 import com.zxyu.test.Dao.UserDao;
-import com.zxyu.test.Entity.AssignmentEntity;
-import com.zxyu.test.Entity.DuplicateEntity;
-import com.zxyu.test.Entity.SubmitEntity;
-import com.zxyu.test.Entity.UserEntity;
+import com.zxyu.test.Entity.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 
 
 @RunWith(SpringRunner.class)
@@ -25,18 +23,12 @@ public class TestApplicationTests {
 
     @Test
     public void testSaveUser() throws Exception {
-        UserEntity user=new UserEntity();
-        user.setPassword("123456");
-        user.setSid("151250199");
-        user.setUsername("zxyu");
+        UserEntity user=new UserEntity("151250199","zxyu","123456");
         userDao.addUser(user);
     }
     @Test
     public void testUpdateUser()throws Exception{
-        UserEntity user=new UserEntity();
-        user.setPassword("123");
-        user.setSid("151250199");
-        user.setUsername("zxyu");
+        UserEntity user=new UserEntity("151250199","zxyu","123");
         userDao.updateUser(user);
     }
 
@@ -53,20 +45,13 @@ public class TestApplicationTests {
 
     @Test
     public void testAddSubmit()throws Exception{
-        SubmitEntity submitEntity=new SubmitEntity();
-        submitEntity.setAid(1);
-        submitEntity.setSid("151250199");
-        submitEntity.setLanguage("java");
+        SubmitEntity submitEntity=new SubmitEntity("151250199",1,"java","已提交","filepath","云计算","0","0",new Date());
         userDao.addSubmit(submitEntity);
     }
 
     @Test
     public void testUpdateSubmit()throws Exception{
-        SubmitEntity submitEntity=new SubmitEntity();
-        submitEntity.setAid(1);
-        submitEntity.setSid("151250199");
-        submitEntity.setLanguage("scala");
-        submitEntity.setType("test");
+        SubmitEntity submitEntity=new SubmitEntity("151250199",1,"scala","已提交","filepath","云计算","0","0",new Date());
         userDao.updateSubmit(submitEntity);
     }
 
@@ -78,19 +63,25 @@ public class TestApplicationTests {
 
     @Test
     public void TestAddAssignment()throws Exception{
-        AssignmentEntity assignmentEntity=new AssignmentEntity();
-        assignmentEntity.setAid(1);
-        assignmentEntity.setIntro("test");
-        assignmentEntity.setTitle("作业1");
+        AssignmentEntity assignmentEntity=new AssignmentEntity("assignment01","云计算","简介","test","file","testfile");
         userDao.addAssignment(assignmentEntity);
     }
 
     @Test
     public void TestAddDuplicate()throws Exception{
-        DuplicateEntity duplicateEntity=new DuplicateEntity();
-        duplicateEntity.setAid(1);
-        duplicateEntity.setSid("151250199");
+        DuplicateEntity duplicateEntity=new DuplicateEntity(1,"151250199","151250200",0.3);
         fileDao.addDuplicate(duplicateEntity);
+    }
+
+    @Test
+    public void TestAddCourseEntity()throws Exception{
+        CourseEntity courseEntity=new CourseEntity("云计算");
+        userDao.addCourseEntity(courseEntity);
+    }
+
+    @Test
+    public void TestFindCourseNextId()throws Exception{
+        System.out.println(userDao.findCourseNextAid());
     }
 
 

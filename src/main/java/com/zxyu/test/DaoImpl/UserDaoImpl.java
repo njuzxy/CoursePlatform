@@ -2,14 +2,19 @@ package com.zxyu.test.DaoImpl;
 
 import com.zxyu.test.Dao.UserDao;
 import com.zxyu.test.Entity.AssignmentEntity;
+import com.zxyu.test.Entity.CourseEntity;
 import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class UserDaoImpl implements UserDao {
@@ -55,7 +60,7 @@ public class UserDaoImpl implements UserDao {
         update.set("state",submitEntity.getState());
         update.set("file",submitEntity.getFile());
         update.set("type",submitEntity.getType());
-       mongoTemplate.upsert(query,update,SubmitEntity.class);
+       mongoTemplate.updateFirst(query,update,SubmitEntity.class);
     }
 
     @Override
@@ -68,5 +73,22 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void addAssignment(AssignmentEntity assignmentEntity) {
         mongoTemplate.save(assignmentEntity);
+    }
+
+    @Override
+    public void addCourseEntity(CourseEntity courseEntity) {
+        mongoTemplate.save(courseEntity);
+    }
+
+    @Override
+    public int findCourseNextAid() {
+        Query query=new Query(Criteria.where("_class").is("com.zxyu.test.Entity.AssignmentEntity"));
+        Sort sort=new Sort(new Sort.Order(Sort.Direction.DESC,"aid"));
+        query.with(sort);
+        List<AssignmentEntity> list=mongoTemplate.find(query,AssignmentEntity.class,"assignment");
+        if(list==null)
+            return 0;
+        else
+            return list.get(0).getAid()+1;
     }
 }
