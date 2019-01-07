@@ -24,24 +24,49 @@
 
         <div class="left" th:include="/root/rLeft :: left"></div>
 
-        <div id="div-addNewCourse">
-            <button id="btn-addNewCourse"><img src="/image/addNew.png" width="25px"><span
-                    style="vertical-align: bottom">&nbsp;Add new course</span></button>
-        </div>
+        <hr/>
+        <h3 id="h3-therterTabTitle">Manage users.</h3>
+        <hr/>
+        <div id="div-manageUser">
+            <div id="div-addSingleBySid">
+                <h5 class="h5-addUser">Add single by sid</h5>
+                <form action="/root/addSingleBySid" method="post">
+                    <table id="table-addSingleBySid" cellpadding="15" cellspacing="10" rules="none">
+                        <tr>
+                            <td class="td-addUser">
+                                Sid:
+                            </td>
+                            <td class="td-addUser2">
+                                <input id="input-addSingleSid" type="text" name="sid">
+                            </td>
+                            <td class="td-addUser3">
+                    <input type="submit" class="btn btn-primary" id="btn-addSingleBySid" value="Add.">
+                            </td>
+                        </tr>
+                    </table>
 
-        <div class="album text-muted" id="div-hot">
-            <h3>Course List</h3>
-            <div class="container-card">
-                <div class="row">
-
-                    <div class="card">
-                        <a href="/student/151250199/assignment" class="course_type">云计算</a>
-                    </div>
-                    <div class="card">
-                        <a href="/" class="course_type">大数据</a>
-                    </div>
-                </div>
+                </form>
             </div>
+            <div id="div-addMultipleByFile">
+                <h5 class="h5-addUser">Add multiple by file</h5>
+                <form action="/root/addMultipleByFile" method="post" enctype="multipart/form-data">
+                    <table id="table-addMultipleByFile" cellpadding="15" cellspacing="10" rules="none">
+                        <tr>
+                            <td class="td-addUser">
+                                User file:
+                            </td>
+                            <td class="td-addUser2">
+                                <input type="file" class="btn btn-primary" id="btn-userFile"
+                                       value="Choose file." name="userFile"></td>
+                            <td class="td-addUser3">
+                                <input type="submit" class="btn btn-primary" id="btn-addMultipleByFile" value="Add.">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+
+
         </div>
 
         <footer class="text-muted">

@@ -24,7 +24,10 @@
 
         <div class="left" th:include="/root/rLeft :: left"></div>
 
-        <div id="div-addNewCourse"><button id="btn-addNewCourse"><img src="/image/addNew.png" width="25px"><span style="vertical-align: bottom">&nbsp;Add new course</span></button></div>
+        <div id="div-addNewCourse">
+            <img src="/image/addNew.png" width="25px">
+            <a href="#modal-container-addNewCourse" role="button" data-toggle="modal">&nbsp;Add new course</a>
+        </div>
 
         <div class="album text-muted" id="div-hot">
             <h3>Course List</h3>
@@ -39,21 +42,57 @@
                     </div>
                 </div>
             </div>
+            <form class="form-class" id="form-addNewCourse" method="post" action="/root/addNewCourse">
+                <div class="modal fade" id="modal-container-addNewCourse" role="dialog"
+                     aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-hidden="true">×
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-class" id="form-modifyPwd">
+                                    <h2 class="form-class-heading">Add submit</h2>
+
+                                    <table>
+                                        <tr>
+                                            <td>
+                                                Course name:
+                                            </td>
+                                            <td>
+                                                <input id="input-addNewCourse" type="text" name="ctype">
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close
+                                </button>
+                                <input type="submit" class="btn btn-primary" id="btn-addNewCourse" value="Add.">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <footer class="text-muted">
+                <div class="container-footer">
+                    <p>
+                        <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
+                    </p>
+                </div>
+            </footer>
         </div>
+        <!--</div>-->
 
-        <footer class="text-muted">
-            <div class="container-footer">
-                <p>
-                    <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
-                </p>
-            </div>
-        </footer>
+        <!-- /container -->
+
     </div>
-    <!--</div>-->
-
-    <!-- /container -->
-
-</div>
 </div>
 </body>
 <script type="text/javascript">

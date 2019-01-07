@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Figure assignment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="/public/jquery/jquery.min.js"></script>
+    <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel="icon" href="/image/favicon.ico"/>
+    <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/style.css">
+    <link rel='stylesheet' href="/css/root.css">
+
+</head>
+<body>
+<div class="background-content">
+    <div class="header" th:include="/root/rHeader :: header"></div>
+
+    <div class="container mainContent">
+
+        <div class="left" th:include="/root/rLeft :: left"></div>
+
+        <hr/>
+        <h3 id="h3-therterTabTitle">Figure assignments.</h3>
+        <hr/>
+        <div id="div-figureAssignment">
+            <form action="/root/figureAssignments" method="post">
+            <table class="table table-striped" id="table-figureAssignment">
+                <thead>
+                <tr>
+                    <th>Choose</th>
+                    <th>Aid</th>
+                    <th>Ctype</th>
+                    <th>Title</th>
+                    <th>Deadline</th>
+                </tr>
+                </thead>
+                <tbody id="tbody-all">
+                <tr>
+                    <td><input type="checkbox" name="figureAid" value="1"></td>
+                    <td>1</td>
+                    <td>Cloud</td>
+                    <td>Assignment01</td>
+                    <td>2018/12/30 23:59:59</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox" name="figureAid" value="2"></td>
+                    <td>2</td>
+                    <td>Cloud</td>
+                    <td>Assignment02</td>
+                    <td>2018/12/30 23:59:59</td>
+                </tr>
+                </tbody>
+            </table>
+                <input type="submit" class="btn btn-primary" id="btn-addFigure" value="Figure.">
+            </form>
+
+        </div>
+
+        <footer class="text-muted">
+            <div class="container-footer">
+                <p>
+                    <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
+                </p>
+            </div>
+        </footer>
+    </div>
+
+</div>
+</body>
+<script type="text/javascript">
+
+    $("#a-t1").attr("class", "nav-link");
+    $("#a-t2").attr("class", "nav-link");
+    $("#a-t3").attr("class", "nav-link active");
+    $("#a-t4").attr("class", "nav-link");
+
+</script>
+
+</html>

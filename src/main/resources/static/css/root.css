@@ -182,8 +182,41 @@ table td, table th {
     float: right;
 }
 
-#btn-confirmPublish，#btn-addSubmit {
+#btn-confirmPublish, #btn-addSubmit {
     margin-left: 825px;
     margin-top: 2rem;
     margin-bottom: 2rem;
+}
+
+/*figure assignment*/
+#div-figureAssignment{
+    margin-left: 100px;
+}
+#btn-addFigure{
+    margin-left: 935px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+
+/*manage user*/
+#div-manageUser {
+    margin-left: 10rem;
+}
+
+.h5-addUser {
+    margin-left: -48rem;
+}
+
+.td-addUser, .td-addUser3 {
+    min-width: 150px;
+}
+
+.td-addUser2 {
+    min-width: 300px;
+}
+
+#input-addSingleSid, #btn-userFile {
+    min-width: 300px;
+    max-width: 300px;
 }
