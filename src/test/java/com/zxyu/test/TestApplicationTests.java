@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 
 @RunWith(SpringRunner.class)
@@ -61,11 +62,11 @@ public class TestApplicationTests {
         System.out.println(submitEntity.getLanguage());
     }
 
-    @Test
+   /* @Test
     public void TestAddAssignment()throws Exception{
         AssignmentEntity assignmentEntity=new AssignmentEntity("assignment01","云计算","简介","test","file","testfile");
         userDao.addAssignment(assignmentEntity);
-    }
+    }*/
 
     @Test
     public void TestAddDuplicate()throws Exception{
@@ -82,6 +83,12 @@ public class TestApplicationTests {
     @Test
     public void TestFindCourseNextId()throws Exception{
         System.out.println(userDao.findCourseNextAid());
+    }
+
+    @Test
+    public void TestFindAllSubmit()throws Exception{
+        List<SubmitEntity>list=userDao.findAllSubmit(1);
+        System.out.println(list.size());
     }
 
 

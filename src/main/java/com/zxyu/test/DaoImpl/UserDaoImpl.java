@@ -86,9 +86,16 @@ public class UserDaoImpl implements UserDao {
         Sort sort=new Sort(new Sort.Order(Sort.Direction.DESC,"aid"));
         query.with(sort);
         List<AssignmentEntity> list=mongoTemplate.find(query,AssignmentEntity.class,"assignment");
-        if(list==null)
+        if(list.size()==0)
             return 0;
         else
             return list.get(0).getAid()+1;
+    }
+
+    @Override
+    public List<SubmitEntity> findAllSubmit(int aid) {
+        Query query=new Query(Criteria.where("aid").is(aid));
+        List<SubmitEntity>result=mongoTemplate.find(query,SubmitEntity.class,"a_submit");
+        return result;
     }
 }

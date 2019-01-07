@@ -6,6 +6,8 @@ import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public interface UserDao {
      void addUser(UserEntity userEntity);
@@ -27,5 +29,7 @@ public interface UserDao {
      void addCourseEntity(CourseEntity courseEntity);
 
      int findCourseNextAid();
+
+     List<SubmitEntity> findAllSubmit(int aid);
 
 }
