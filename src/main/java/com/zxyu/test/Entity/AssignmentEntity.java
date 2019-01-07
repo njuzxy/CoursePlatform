@@ -16,7 +16,8 @@ public class AssignmentEntity implements Serializable {
     private String file;
     private String testfile;
 
-    public AssignmentEntity(String title, String ctype, String intro, String deadline, String file, String testfile) {
+    public AssignmentEntity(int aid,String title, String ctype, String intro, String deadline, String file, String testfile) {
+        this.aid=aid;
         this.title = title;
         this.ctype = ctype;
         this.intro = intro;
