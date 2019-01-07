@@ -62,11 +62,11 @@ public class TestApplicationTests {
         System.out.println(submitEntity.getLanguage());
     }
 
-   /* @Test
+    @Test
     public void TestAddAssignment()throws Exception{
-        AssignmentEntity assignmentEntity=new AssignmentEntity("assignment01","云计算","简介","test","file","testfile");
+        AssignmentEntity assignmentEntity=new AssignmentEntity(userDao.findCourseNextAid(),"assignment01","云计算","简介","test","file","testfile");
         userDao.addAssignment(assignmentEntity);
-    }*/
+    }
 
     @Test
     public void TestAddDuplicate()throws Exception{
@@ -88,6 +88,18 @@ public class TestApplicationTests {
     @Test
     public void TestFindAllSubmit()throws Exception{
         List<SubmitEntity>list=userDao.findAllSubmit(1);
+        System.out.println(list.size());
+    }
+
+    @Test
+    public void TestFindAllCourse()throws Exception{
+        List<CourseEntity>list=userDao.findAllCourse();
+        System.out.println(list.size());
+    }
+
+    @Test
+    public void TestFindAllAssignment()throws Exception{
+        List<AssignmentEntity>list=userDao.findAllAssignment("云计算");
         System.out.println(list.size());
     }
 

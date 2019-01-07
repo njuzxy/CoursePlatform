@@ -98,4 +98,18 @@ public class UserDaoImpl implements UserDao {
         List<SubmitEntity>result=mongoTemplate.find(query,SubmitEntity.class,"a_submit");
         return result;
     }
+
+    @Override
+    public List<CourseEntity> findAllCourse() {
+        Query query=new Query(Criteria.where("_class").is("com.zxyu.test.Entity.CourseEntity"));
+        List<CourseEntity>result=mongoTemplate.find(query,CourseEntity.class,"course");
+        return result;
+    }
+
+    @Override
+    public List<AssignmentEntity> findAllAssignment(String ctype) {
+        Query query=new Query(Criteria.where("ctype").is(ctype));
+        List<AssignmentEntity>result=mongoTemplate.find(query,AssignmentEntity.class,"assignment");
+        return result;
+    }
 }

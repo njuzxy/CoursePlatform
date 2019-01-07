@@ -32,4 +32,8 @@ public interface UserDao {
 
      List<SubmitEntity> findAllSubmit(int aid);
 
+     List<CourseEntity> findAllCourse();
+
+     List<AssignmentEntity> findAllAssignment(String ctype);
+
 }
