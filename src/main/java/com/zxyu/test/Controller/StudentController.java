@@ -4,6 +4,7 @@ import com.zxyu.test.Dao.UserDao;
 import com.zxyu.test.Entity.AssignmentEntity;
 import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
+import com.zxyu.test.Helper.AssistTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class StudentController {
 
     @Autowired
     private UserDao userDao;
+
+    private AssistTool assistTool=new AssistTool();
 
     @RequestMapping(value = "/{sid}/course", method = RequestMethod.GET)
     public ModelAndView getCourse(@PathVariable String sid) {
@@ -68,7 +71,8 @@ public class StudentController {
         String title = "assignment01";
 
         String url = "/src/main/java/com/zxyu/test/jars/" + courseType + "/" + title + "/submit/151250199";
-        boolean submitResult = saveFile(url, submitFile);
+        String fileNameS = submitFile.getOriginalFilename();
+        boolean submitResult = assistTool.saveFile(url, submitFile,fileNameS);
 
         if (!submitResult) {
             //alert提醒
@@ -82,7 +86,7 @@ public class StudentController {
             }
         }
 
-        String submitFileUrl = url + "/" + submitFile.getOriginalFilename();
+        String submitFileUrl = url + "/" + fileNameS;
         Date date = new Date();
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", date);
@@ -98,36 +102,6 @@ public class StudentController {
         }
 
 //        return "redirect:/student/151250199/assignment";
-    }
-
-    public boolean saveFile(String url, MultipartFile file) {
-        String tempUrl = System.getProperty("user.dir");
-
-        if (file.isEmpty()) {
-            return false;
-        }
-        String fileName = file.getOriginalFilename();
-        int size = (int) file.getSize();
-        System.out.println(fileName + "-->" + size);
-
-        String path = tempUrl + url;
-
-        File dest = new File(path + "/" + fileName);
-        if (!dest.getParentFile().exists()) { //判断文件父目录是否存在
-            dest.getParentFile().mkdirs();
-            System.out.println("*test* " + dest.getParentFile());
-
-        }
-        try {
-            file.transferTo(dest); //保存文件
-            return true;
-        } catch (IllegalStateException e) {
-            e.printStackTrace();
-            return false;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
     }
 
 }
