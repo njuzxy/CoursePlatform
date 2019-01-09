@@ -1,13 +1,18 @@
 package com.zxyu.test.Helper;
 
+import ch.ethz.ssh2.ChannelCondition;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.Session;
 import ch.ethz.ssh2.StreamGobbler;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import java.io.*;
 
 public class RemoteCmd {
     private Connection connection;
+    private static final Logger log = Logger.getLogger(RemoteCmd.class);
     private String ip;
     private String  username;
     private String password;
@@ -25,6 +30,11 @@ public class RemoteCmd {
         try {
             connection.connect();
             result=connection.authenticateWithPassword(username,password);
+            if(result){
+                log.info("认证成功");
+            }else{
+                log.info("认证失败");
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -36,8 +46,21 @@ public class RemoteCmd {
         if(login()){
             try {
                 Session session=connection.openSession();
-                session.execCommand(cmd);
+                //session.execCommand(cmd);
+                session.requestPTY("bash");
+                session.startShell();
+                PrintWriter out = new PrintWriter(session.getStdin());
+                out.println(cmd);
+                out.println("exit");
+                out.close();
+                session.waitForCondition(ChannelCondition.CLOSED | ChannelCondition.EOF | ChannelCondition.EXIT_STATUS , 30000);
                 result=ProcessStdOut(session.getStdout(),charset);
+                if(StringUtils.isBlank(result)){
+                    log.info("得到标准输出为空"+",执行的命令："+cmd);
+                    result=ProcessStdOut(session.getStderr(),charset);
+                }else{
+                    log.info("执行命令成功"+",执行的命令："+cmd);
+                }
                 connection.close();
                 session.close();
             } catch (IOException e) {
@@ -66,6 +89,12 @@ public class RemoteCmd {
 
    public static void main(String args[]){
     RemoteCmd remote=new RemoteCmd("172.19.241.248","root","pnjueducn");
-    System.out.println(remote.exec("pwd"));
+    StringBuilder sb=new StringBuilder();
+    sb.append("spark-submit --master local ");
+    if(!args[0].equals("python"))
+        sb.append("--class main ");
+    sb.append(args[1]);
+    //System.out.println(remote.exec("spark-submit --master local /home/spark/2DZ1832003.py"));
+       System.out.println(remote.exec(sb.toString()));
    }
 }
