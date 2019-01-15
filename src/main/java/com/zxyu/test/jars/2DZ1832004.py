@@ -13,7 +13,7 @@ class TopK(object):
         else:
             heapq.heappushpop(self.Kdata, element)
 
-    def print(self,path):
+    def output(self,path):
         self.Kdata.sort(reverse = True)
         with open(path, 'w') as output:
             for pair in self.Kdata:
@@ -42,7 +42,7 @@ with open('/home/homework02/variables.txt','r') as configFile:
     dataPath = configFile.readline().strip('\n')
     outputPath = configFile.readline().strip('\n')
 
-sc = SparkContext("192.168.68.11:7077", "ComputingTopK")
+sc = SparkContext("172.19.241.248:7077", "ComputingTopK")
 ssc = StreamingContext(sc,1)
 
 dataFile = sc.textFile(dataPath)
@@ -61,5 +61,6 @@ TOPK = TopK(KValue)
 for element in finalTopK:
     TOPK.push(element)
 # reverse the heap and output
-TOPK.print(outputPath+'DZ1832004.txt')
+TOPK.output(outputPath+'DZ1832004.txt')
+sc.stop()
 

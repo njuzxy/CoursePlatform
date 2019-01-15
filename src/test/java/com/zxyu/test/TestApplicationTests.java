@@ -3,6 +3,8 @@ package com.zxyu.test;
 import com.zxyu.test.Dao.FileDao;
 import com.zxyu.test.Dao.UserDao;
 import com.zxyu.test.Entity.*;
+import com.zxyu.test.Helper.MyLauncher;
+import com.zxyu.test.Helper.RemoteCmd;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +103,22 @@ public class TestApplicationTests {
     public void TestFindAllAssignment()throws Exception{
         List<AssignmentEntity>list=userDao.findAllAssignment("云计算");
         System.out.println(list.size());
+    }
+
+    @Test
+    public void TestMyLauncher()throws Exception{
+        String[]input=new String[2];
+        input[0]="python";
+        input[1]="i:\\testpy.py";
+        MyLauncher.main(input);
+    }
+
+    @Test
+    public void TestRemoteCmd()throws Exception{
+        String[]input=new String[2];
+        input[0]="python";
+        input[1]="/home/spark/file/testpy.py";
+        RemoteCmd.main(input);
     }
 
 

@@ -55,15 +55,19 @@ public class FTPUtil {
     public void mkdir( String dir) {
                  try {
                      Vector vector=sftp.ls(dir);
-                     if(vector==null){
-                         sftp.mkdir(dir);
-                         System.out.println("创建文件夹成功！");
-                     }else
+                     if(vector!=null)
                          System.out.println("目录已存在");
+                     }
 
-                     } catch (SftpException e) {
-                         System.out.println("创建文件夹失败！");
-                         e.printStackTrace();
+                      catch (SftpException e) {
+                          try {
+                              sftp.mkdir(dir);
+                              System.out.println("创建文件夹成功！");
+                          } catch (SftpException e1) {
+                              System.out.println("创建文件夹失败");
+                          }
+
+
                      }
     }
 
@@ -127,7 +131,7 @@ public class FTPUtil {
     public static void main(String args[]){
         FTPUtil ftpUtil=new FTPUtil("172.19.241.248",22,"root","pnjueducn");
         ftpUtil.mkdir("/home/spark/file");
-        ftpUtil.uploadFile("/home/spark/file",new File("i://example.py"));
+        ftpUtil.uploadFile("/home/spark/file",new File("i://testpy.py"));
         ftpUtil.closeAll();
     }
 

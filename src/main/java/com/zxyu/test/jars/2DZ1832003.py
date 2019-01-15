@@ -1,6 +1,7 @@
+
 from pyspark import SparkContext, SparkConf
 
-conf = SparkConf().setAppName('Top K').setMaster('spark://192.168.68.11:7077')#提交版spark://shzx002:18080
+conf = SparkConf().setAppName('Top K').setMaster('spark://172.19.241.248:7077')#提交版spark://shzx002:18080
 # conf = SparkConf().setAppName('Top K').setMaster('local')#本地测试
 sc = SparkContext(conf=conf)
 
