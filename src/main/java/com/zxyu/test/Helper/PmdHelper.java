@@ -18,6 +18,10 @@ public class PmdHelper {
     private static DocumentBuilderFactory factory=null;
     private static DocumentBuilder db=null;
     private static Document document=null;
+    private String command;
+    private String srcPath;
+    private String outputPath;
+    private String rulePath;
 
     static{
         try{
@@ -28,10 +32,6 @@ public class PmdHelper {
         }
     }
 
-    private String command;
-    private String srcPath;
-    private String outputPath;
-    private String rulePath;
     public PmdHelper(String srcPath,String outputPath,String rulePath) {
         this.srcPath=srcPath;
         this.outputPath=outputPath;
@@ -64,8 +64,9 @@ public class PmdHelper {
     }
 
     public void execPmd(){
-        String[]input=new String[1];
+        String[]input=new String[2];
         input[0]=command;
+        input[1]="pmd";
         System.out.println("command:"+command);
         try {
             LocalCmd.main(input);
