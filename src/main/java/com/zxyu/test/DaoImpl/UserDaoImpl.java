@@ -6,7 +6,6 @@ import com.zxyu.test.Entity.CourseEntity;
 import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
@@ -59,7 +58,11 @@ public class UserDaoImpl implements UserDao {
         update.set("language",submitEntity.getLanguage());
         update.set("state",submitEntity.getState());
         update.set("file",submitEntity.getFile());
+        update.set("text_file",submitEntity.getText_file());
         update.set("type",submitEntity.getType());
+        update.set("run_score",submitEntity.getRun_score());
+        update.set("quality_score",submitEntity.getQuality_score());
+        update.set("time",submitEntity.getTime());
        mongoTemplate.updateFirst(query,update,SubmitEntity.class);
     }
 

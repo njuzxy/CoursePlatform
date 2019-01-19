@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 @Document(collection = "duplicate")
 @CompoundIndexes({
-        @CompoundIndex(name = "duplicateIndex",def = "{'aid':1,'sid':1}")
+        @CompoundIndex(name = "duplicateIndex",def = "{'aid':1,'sid':1,'similar_sid:1'}")
 })
 public class DuplicateEntity implements Serializable {
     private static final long serialVersionUID = -3258839839160856613L;
