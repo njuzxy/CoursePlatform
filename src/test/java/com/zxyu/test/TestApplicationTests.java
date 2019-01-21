@@ -46,7 +46,7 @@ public class TestApplicationTests {
         userDao.removeUser("151250199");
     }
 
-    @Test
+   /* @Test
     public void testAddSubmit()throws Exception{
         SubmitEntity submitEntity=new SubmitEntity("151250199",1,"java","已提交","filepath","云计算","0","0",new Date());
         userDao.addSubmit(submitEntity);
@@ -56,7 +56,7 @@ public class TestApplicationTests {
     public void testUpdateSubmit()throws Exception{
         SubmitEntity submitEntity=new SubmitEntity("151250199",1,"scala","已提交","filepath","云计算","0","0",new Date());
         userDao.updateSubmit(submitEntity);
-    }
+    }*/
 
     @Test
     public void TestFindSubmit()throws Exception{
