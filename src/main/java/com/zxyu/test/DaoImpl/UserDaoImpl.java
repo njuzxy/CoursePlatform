@@ -121,6 +121,20 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public void updateAssignment(AssignmentEntity assignmentEntity) {
+        Query query=new Query(Criteria.where("aid").is(assignmentEntity.getAid()));
+        Update update=new Update();
+        update.set("title",assignmentEntity.getTitle());
+        update.set("ctype",assignmentEntity.getCtype());
+        update.set("intro",assignmentEntity.getIntro());
+        update.set("deadline",assignmentEntity.getDeadline());
+        update.set("file",assignmentEntity.getFile());
+        update.set("testfile",assignmentEntity.getTestfile());
+        update.set("state",assignmentEntity.getState());
+        mongoTemplate.updateFirst(query,update,AssignmentEntity.class);
+    }
+
+    @Override
     public void addNotices(List<NoticeEntity> notices) {
         for(int i=0;i<notices.size();i++)
             mongoTemplate.save(notices.get(i));

@@ -35,6 +35,8 @@ public interface UserDao {
 
      AssignmentEntity findAssignment(int aid);
 
+     void updateAssignment(AssignmentEntity assignmentEntity);
+
      void addNotices(List<NoticeEntity>notices);
 
      void updateNotices(NoticeEntity notice);
