@@ -34,12 +34,18 @@
             <div class="container-card">
                 <div class="row">
 
+                    <div class="card" th:each="c, State : ${session.courses}">
+                        <a href="/root/${c.ctype}/assignment" class="course_type" th:text="${c.ctype}"></a>
+                    </div>
+
+                    <!--
                     <div class="card">
                         <a href="/student/151250199/assignment" class="course_type">云计算</a>
                     </div>
                     <div class="card">
                         <a href="/" class="course_type">大数据</a>
                     </div>
+                    -->
                 </div>
             </div>
             <form class="form-class" id="form-addNewCourse" method="post" action="/root/addNewCourse">

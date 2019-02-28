@@ -39,14 +39,25 @@
                     </tr>
                     </thead>
                     <tbody id="tbody-all">
-                    <tr>
-                        <td>1</td>
-                        <td>Assignment01</td>
-                        <td>A simple python question.</td>
-                        <td>2018/12/30 23:59:59</td>
+
+                    <tr th:each="a, State : ${assignments}">
+                        <td th:text="${a.aid}"></td>
+                        <td th:text="${a.title}"></td>
+                        <td th:text="${a.intro}"></td>
+                        <td th:text="${a.deadline}"></td>
                         <td>
-                            <span><a href="/student/151250199/assignmentInfo" class="btn btn-primary" value="Detail"></a></span></td>
+                            <span><a th:href="/student/${sid}/${ctype}/${a.aid}/assignmentInfo" class="btn btn-primary" value="Detail"></a></span></td>
+
                     </tr>
+
+                    <!--<tr>-->
+                        <!--<td>1</td>-->
+                        <!--<td>Assignment01</td>-->
+                        <!--<td>A simple python question.</td>-->
+                        <!--<td>2018/12/30 23:59:59</td>-->
+                        <!--<td>-->
+                            <!--<span><a href="/student/151250199/assignmentInfo" class="btn btn-primary" value="Detail"></a></span></td>-->
+                    <!--</tr>-->
                     </tbody>
                 </table>
             </div>

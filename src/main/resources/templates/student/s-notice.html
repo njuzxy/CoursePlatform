@@ -22,36 +22,27 @@
         <div class="left" th:include="/student/sLeft :: left"></div>
 
         <div class="album text-muted" id="div-hot">
-            <h3 style="margin-left: -15rem;">Course List</h3>
-            <div class="container-card">
-                <div class="row">
+            <hr/>
+            <h3 id="h3-therterTabTitle">Message list.</h3>
+            <hr/>
 
-                    <div class="card" th:each="c : ${courses}">
-                        <a th:href="/student/${sid}/${c.getCtype()}/assignment" class="course_type" th:text="${c.getCtype()}"></a>
-                    </div>
-                    <!--<div class="card">-->
-                    <!--<a href="/student/151250199/assignment" class="course_type">云计算</a>-->
-                    <!--</div>-->
-                    <!--<div class="card">-->
-                    <!--<a href="/" class="course_type">大数据</a>-->
-                    <!--</div>-->
+            <div id="div-message">
+
+            </div>
+
+            <footer class="text-muted">
+                <div class="container-footer">
+                    <p class="float-right">
+                        <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
+                    </p>
                 </div>
-            </div>
+            </footer>
         </div>
+        <!--</div>-->
 
-        <footer class="text-muted">
-            <div class="container-footer">
-                <p class="float-right">
-                    <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
-                </p>
-            </div>
-        </footer>
+        <!-- /container -->
+
     </div>
-    <!--</div>-->
-
-    <!-- /container -->
-
-</div>
 </div>
 </body>
 <script type="text/javascript">
@@ -62,10 +53,4 @@
         });
     });
 </script>
-
-<script type="text/javascript" th:inline="javascript">
-    var courseC = [[${courses.get(0).getCtype()}]];
-    alert(courseC);
-</script>
-
 </html>
