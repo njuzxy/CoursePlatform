@@ -26,13 +26,13 @@
             <hr/>
             <h3 id="h3-therterTabTitle">Assignment 01</h3>
             <hr/>
-            <div id="div1-publish-show">
-                <table id="table-publish-show" cellpadding="15" cellspacing="10" rules="none">
+            <div id="div-assignmentInfo">
+                <table id="table-assignmentInfo" cellpadding="15" cellspacing="10" rules="none">
                     <tr>
                         <td class="td-assignmentLeft">
                             Course type:
                         </td>
-                        <td>
+                        <td th:text="${assignment.getCtype()}">
                             Statistics
                         </td>
                     </tr>
@@ -40,7 +40,7 @@
                         <td>
                             Description:
                         </td>
-                        <td>
+                        <td th:text="${assignment.get()}">
                             A simple python question.
                         </td>
                     </tr>
@@ -48,7 +48,7 @@
                         <td>
                             Deadline:
                         </td>
-                        <td>
+                        <td th:text="${assignment.get()}">
                             2018/12/31 23:59:59
                         </td>
                     </tr>
@@ -56,7 +56,7 @@
                         <td>
                             Late rule:
                         </td>
-                        <td>
+                        <td th:text="${assignment.get()}">
                             24h/80%
                         </td>
                     </tr>
@@ -73,7 +73,7 @@
                         <td>
                             Submit State:
                         </td>
-                        <td>
+                        <td th:text="${submitState}">
                             Not submitted
                         </td>
                     </tr>
@@ -81,7 +81,7 @@
                         <td>
                             Score:
                         </td>
-                        <td>
+                        <td th:text="${score}">
                             Not available
                         </td>
                     </tr>
@@ -121,9 +121,17 @@
                                                     <select id="select-fileType" name="fileType" value="">
                                                         <option value="java">java</option>
                                                         <option value="python">python</option>
-                                                        <option value="jar">jar</option>
+                                                        <option value="scala">jar</option>
                                                     </select>
                                                 </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    TXT file:
+                                                </td>
+                                                <td>
+                                                    <input type="file" id="btn-txtFile"
+                                                           value="Choose file." name="txtFile"></td>
                                             </tr>
                                             <tr>
                                                 <td>

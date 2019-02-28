@@ -40,9 +40,10 @@ public class RootController {
 
     @RequestMapping(value = "/course", method = RequestMethod.GET)
     public ModelAndView getCourse() {
+        List<CourseEntity> courses = userDao.findAllCourse();
         ModelAndView mv = new ModelAndView("/root/r-course");
         mv.addObject("sid", "root");
-
+        mv.addObject("courses", courses);
         return mv;
     }
 

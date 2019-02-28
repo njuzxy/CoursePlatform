@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="/public/jquery/jquery.min.js"></script>
+    <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
+    <link rel='stylesheet' href='/css/style.css'/>
+    <link rel="icon" href="/image/favicon.ico"/>
+    <link rel='stylesheet' href="/css/homepage.css">
+</head>
+<body>
+<div class="background-content">
+    <div class="header" th:include="/root/rHeader :: header"></div>
+
+    <div class="container mainContent">
+
+        <div class="left" th:include="/root/rLeft :: left"></div>
+
+        <div class="album text-muted" id="div-hot">
+
+            <hr/>
+            <h3 id="h3-therterTabTitle">Assignment 01</h3>
+            <hr/>
+            <div id="div-assignmentInfo">
+                <table id="table-assignmentInfo" cellpadding="15" cellspacing="10" rules="none">
+                    <tr>
+                        <td class="td-assignmentLeft">
+                            Course type:
+                        </td>
+                        <td>
+                            Statistics
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Description:
+                        </td>
+                        <td>
+                            A simple python question.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Deadline:
+                        </td>
+                        <td>
+                            2018/12/31 23:59:59
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Late rule:
+                        </td>
+                        <td>
+                            24h/80%
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Detailed file:
+                        </td>
+                        <td>
+                            <input type="button" href="#" class="btn btn-primary" id="btn-downloadDetailedFile"
+                                   value="Download."
+                                   onclick=""></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            All score:
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Duplicate detail:
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+
+            <footer class="text-muted">
+                <div class="container-footer">
+                    <p class="float-right">
+                        <a href="#">Back to top<img src="/image/go_up.png" width="30px"></a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+        <!--</div>-->
+
+        <!-- /container -->
+
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $(".nav-link").click(function () {
+            $(".nav-link active").attr("class", "nav-link");
+            $(this).attr("class", "nav-link active");
+        });
+    });
+</script>
+</html>
