@@ -1,10 +1,7 @@
 package com.zxyu.test.DaoImpl;
 
 import com.zxyu.test.Dao.UserDao;
-import com.zxyu.test.Entity.AssignmentEntity;
-import com.zxyu.test.Entity.CourseEntity;
-import com.zxyu.test.Entity.SubmitEntity;
-import com.zxyu.test.Entity.UserEntity;
+import com.zxyu.test.Entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -121,5 +118,26 @@ public class UserDaoImpl implements UserDao {
         Query query=new Query(Criteria.where("aid").is(aid));
         AssignmentEntity assignmentEntity=mongoTemplate.findOne(query,AssignmentEntity.class);
         return assignmentEntity;
+    }
+
+    @Override
+    public void addNotices(List<NoticeEntity> notices) {
+        for(int i=0;i<notices.size();i++)
+            mongoTemplate.save(notices.get(i));
+    }
+
+    @Override
+    public void updateNotices(NoticeEntity notice) {
+        Query query=new Query(Criteria.where("aid").is(notice.getAid()).and("sid").is(notice.getSid()));
+        Update update=new Update();
+        update.set("state","已读");
+        mongoTemplate.updateFirst(query,update,NoticeEntity.class);
+    }
+
+    @Override
+    public List<UserEntity> findAllUser() {
+        Query query=new Query(Criteria.where("_class").is("com.zxyu.test.Entity.UserEntity"));
+        List<UserEntity>result=mongoTemplate.find(query,UserEntity.class,"student");
+        return result;
     }
 }

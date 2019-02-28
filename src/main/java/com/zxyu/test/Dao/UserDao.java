@@ -1,9 +1,6 @@
 package com.zxyu.test.Dao;
 
-import com.zxyu.test.Entity.AssignmentEntity;
-import com.zxyu.test.Entity.CourseEntity;
-import com.zxyu.test.Entity.SubmitEntity;
-import com.zxyu.test.Entity.UserEntity;
+import com.zxyu.test.Entity.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -37,5 +34,11 @@ public interface UserDao {
      List<AssignmentEntity> findAllAssignment(String ctype);
 
      AssignmentEntity findAssignment(int aid);
+
+     void addNotices(List<NoticeEntity>notices);
+
+     void updateNotices(NoticeEntity notice);
+
+     List<UserEntity> findAllUser();
 
 }
