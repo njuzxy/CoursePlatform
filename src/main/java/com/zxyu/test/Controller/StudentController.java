@@ -140,11 +140,10 @@ public class StudentController {
         String submitFileUrl = submitUrl + "/" + submitFileNameS;
         Date date = new Date();
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-<<<<<<< HEAD
+
         SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", "", date);
-=======
-        SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", "0",date);
->>>>>>> 9bc86a9e898e54052d39286dadec925826360801
+
+       // SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", "0",date);
         userDao.addSubmit(submit);
         System.out.println("---------------------------------submit");
 
