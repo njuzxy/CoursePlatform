@@ -46,7 +46,7 @@
                         <td th:text="${a.intro}"></td>
                         <td th:text="${a.deadline}"></td>
                         <td>
-                            <span><a th:href="/student/${sid}/${ctype}/${a.aid}/assignmentInfo" class="btn btn-primary" value="Detail"></a></span></td>
+                            <span><a th:href="@{'/student/'+${sid}+'/'+${ctype}+'/'+${a.aid}+'/assignmentInfo'}" class="btn btn-primary" value="Detail"></a></span></td>
 
                     </tr>
 

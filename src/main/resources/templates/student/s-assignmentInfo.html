@@ -40,7 +40,7 @@
                         <td>
                             Description:
                         </td>
-                        <td th:text="${assignment.get()}">
+                        <td th:text="${assignment.getIntro()}">
                             A simple python question.
                         </td>
                     </tr>
@@ -48,7 +48,7 @@
                         <td>
                             Deadline:
                         </td>
-                        <td th:text="${assignment.get()}">
+                        <td th:text="${assignment.getDeadline()}">
                             2018/12/31 23:59:59
                         </td>
                     </tr>
@@ -56,7 +56,7 @@
                         <td>
                             Late rule:
                         </td>
-                        <td th:text="${assignment.get()}">
+                        <!--<td th:text="${assignment.get()}">--><td>
                             24h/80%
                         </td>
                     </tr>

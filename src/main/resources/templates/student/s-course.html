@@ -27,7 +27,9 @@
                 <div class="row">
 
                     <div class="card" th:each="c : ${courses}">
-                        <a th:href="/student/${sid}/${c.getCtype()}/assignment" class="course_type" th:text="${c.getCtype()}"></a>
+                        <!--<a class="course_type" th:text="${c.getCtype()}"></a>-->
+
+                        <a th:href="@{'/student/'+${sid}+'/'+${c.getCtype()}+'/assignment'}" class="course_type" th:text="${c.getCtype()}"></a>
                     </div>
                     <!--<div class="card">-->
                     <!--<a href="/student/151250199/assignment" class="course_type">云计算</a>-->

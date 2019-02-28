@@ -41,7 +41,7 @@ public class StudentController {
 //            course.put("ctype", c.getCtype());
 //            coursesList.add(course);
 //        }
-//        System.out.println("course[0] = "+courses.get(0).getCtype());
+        System.out.println("course[0] = " + courses.get(0).getCtype());
 
         ModelAndView mv = new ModelAndView("/student/s-course");
         mv.addObject("student", student);
@@ -53,6 +53,7 @@ public class StudentController {
     @RequestMapping(value = "/{sid}/{ctype}/assignment", method = RequestMethod.GET)
     public ModelAndView getAssignment(@PathVariable String sid, @PathVariable String ctype) {
         List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
+        System.out.println("------------" + assignments.get(0).getTitle());
         ModelAndView mv = new ModelAndView("/student/s-courseInfo");
         mv.addObject("sid", sid);
         mv.addObject("ctype", ctype);
@@ -64,24 +65,28 @@ public class StudentController {
     public ModelAndView getAssignmentInfo(@PathVariable String sid, @PathVariable String ctype, @PathVariable String aid) {
         int aidInt = Integer.parseInt(aid);
         ModelAndView mv = new ModelAndView("/student/s-assignmentInfo");
-        AssignmentEntity assignment = new AssignmentEntity(aidInt, "assignment01", "Statistics", "A simple question.", "2019/03/15 23:59:59", "1", "2");
+        AssignmentEntity assignment = userDao.findAssignment(aidInt);
         SubmitEntity submit = userDao.findSubmit(sid, aidInt);
 
         String submitState = "";
         String score = "";
-        if (submit.getState().equals("NOT_SUBMITTED")) {
-            submitState="Not submitted";
-            score="Not available";
-        } else if (submit.getState().equals("SUBMITTED")) {
-            submitState="Submitted";
-            score="Waiting";
-        } else if (submit.getState().equals("SCORED")) {
-            submitState="Scored";
-            score="run : "+submit.getRun_score()+"  /  quality : "+submit.getQuality_score();
+        if (submit == null) {
+            submitState = "Not submitted";
+            score = "Not available";
+        } else if (submit.getState().equals("not_submitted")) {
+            submitState = "Not submitted";
+            score = "Not available";
+        } else if (submit.getState().equals("submitted")) {
+            submitState = "Submitted";
+            score = "Waiting";
+        } else if (submit.getState().equals("scored")) {
+            submitState = "Scored";
+            score = "run : " + submit.getRun_score() + "  /  quality : " + submit.getQuality_score();
         }
+        System.out.println(submitState+"         "+score);
         mv.addObject("assignment", assignment);
         mv.addObject("submitState", submitState);
-        mv.addObject("score",score);
+        mv.addObject("score", score);
         return mv;
     }
 
@@ -140,12 +145,12 @@ public class StudentController {
         String submitFileUrl = submitUrl + "/" + submitFileNameS;
         Date date = new Date();
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-<<<<<<< HEAD
         SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", "", date);
-=======
-        SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", "0",date);
->>>>>>> 9bc86a9e898e54052d39286dadec925826360801
+        if(userDao.findSubmit(sid,0)==null){
         userDao.addSubmit(submit);
+        }else{
+            userDao.updateSubmit(submit);
+        }
         System.out.println("---------------------------------submit");
 
         try {
