@@ -9,7 +9,7 @@ public class SubmitHelper {
         this.dir = dir;
     }
 
-    public void submit(){
+    private void submit(){
         File file=new File(dir);
         File[]tmplist=file.listFiles();
         System.out.println(tmplist.length);

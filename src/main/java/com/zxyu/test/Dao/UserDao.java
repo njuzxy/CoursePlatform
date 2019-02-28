@@ -36,4 +36,6 @@ public interface UserDao {
 
      List<AssignmentEntity> findAllAssignment(String ctype);
 
+     AssignmentEntity findAssignment(int aid);
+
 }

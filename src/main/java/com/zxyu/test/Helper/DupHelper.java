@@ -2,12 +2,11 @@ package com.zxyu.test.Helper;
 
 
 import com.zxyu.test.Entity.DuplicateEntity;
-import org.springframework.stereotype.Component;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
 public class DupHelper {
 
     private int aid;
