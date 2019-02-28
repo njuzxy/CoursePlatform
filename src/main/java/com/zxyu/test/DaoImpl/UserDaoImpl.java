@@ -115,4 +115,11 @@ public class UserDaoImpl implements UserDao {
         List<AssignmentEntity>result=mongoTemplate.find(query,AssignmentEntity.class,"assignment");
         return result;
     }
+
+    @Override
+    public AssignmentEntity findAssignment(int aid) {
+        Query query=new Query(Criteria.where("aid").is(aid));
+        AssignmentEntity assignmentEntity=mongoTemplate.findOne(query,AssignmentEntity.class);
+        return assignmentEntity;
+    }
 }

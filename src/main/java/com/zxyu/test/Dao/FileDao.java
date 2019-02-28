@@ -1,5 +1,6 @@
 package com.zxyu.test.Dao;
 
+import com.zxyu.test.Entity.AssignmentEntity;
 import com.zxyu.test.Entity.DuplicateEntity;
 import com.zxyu.test.Entity.SubmitEntity;
 import org.springframework.stereotype.Component;
@@ -17,4 +18,5 @@ public interface FileDao {
     List<SubmitEntity> getJavaSubmits(int aid);
 
     List<SubmitEntity> getScalaSubmits(int aid);
+
 }
