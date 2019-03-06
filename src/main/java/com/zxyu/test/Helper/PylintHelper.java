@@ -73,7 +73,7 @@ public class PylintHelper {
                 String line = null;
 
                 while ((line = br.readLine()) != null) {
-                    System.out.println(line);
+                    //System.out.println(line);
                     if(line.equals(""))
                         continue;
                     char[]chars=line.toCharArray();

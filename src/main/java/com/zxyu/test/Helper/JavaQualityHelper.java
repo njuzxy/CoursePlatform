@@ -52,6 +52,7 @@ public class JavaQualityHelper {
     public static void main(String args[]){
         JavaQualityHelper helper=new JavaQualityHelper("I:\\src_text\\1\\java");
         helper.calJavaQuality();
+        System.out.println(helper.getList().size());
         System.out.println(helper.getList().get(0)[0]);
     }
 }
