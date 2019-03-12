@@ -27,6 +27,24 @@
         <hr/>
         <h3 id="h3-therterTabTitle">Figure assignments.</h3>
         <hr/>
+
+        <div class="div-alignLeft">
+            <span>Course &emsp;&emsp;&nbsp;type : </span>&emsp;
+        <select id="select-courseTypeFigure" name="courseTypeFigure" value="">
+            <option value="All">All</option>
+            <option value="Statistics">Statistics</option>
+            <option value="Cloud">Cloud</option>
+        </select>
+        </div>
+
+        <div class="div-alignLeft">
+            <span>Assignment state : </span>&emsp;
+        <input type="radio" th:text="all"  name="assignmentState" checked="checked">&emsp;
+        <input type="radio" th:text="Published" name="assignmentState">&emsp;
+        <input type="radio" th:text="End" name="assignmentState">&emsp;
+        <input type="radio" th:text="Finished" name="assignmentState">&emsp;
+        <input type="radio" th:text="Scored" name="assignmentState">
+        </div>
         <div id="div-figureAssignment">
             <form action="/root/figureAssignments" method="post">
             <table class="table table-striped" id="table-figureAssignment">
@@ -37,6 +55,7 @@
                     <th>Ctype</th>
                     <th>Title</th>
                     <th>Deadline</th>
+                    <th>State</th>
                 </tr>
                 </thead>
                 <tbody id="tbody-all">
@@ -46,6 +65,7 @@
                     <td>Cloud</td>
                     <td>Assignment01</td>
                     <td>2018/12/30 23:59:59</td>
+                    <td>End</td>
                 </tr>
                 <tr>
                     <td><input type="checkbox" name="figureAid" value="2"></td>
@@ -53,6 +73,7 @@
                     <td>Cloud</td>
                     <td>Assignment02</td>
                     <td>2018/12/30 23:59:59</td>
+                    <td>End</td>
                 </tr>
                 </tbody>
             </table>

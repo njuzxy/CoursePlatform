@@ -12,6 +12,8 @@
     <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
     <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/main.css">
+
 </head>
 <body>
 <div class="background-content">
@@ -32,7 +34,7 @@
                         <td class="td-assignmentLeft">
                             Course type:
                         </td>
-                        <td>
+                        <td th:text="${assignment.getCtype()}">
                             Statistics
                         </td>
                     </tr>
@@ -40,7 +42,7 @@
                         <td>
                             Description:
                         </td>
-                        <td>
+                        <td th:text="${assignment.getIntro()}">
                             A simple python question.
                         </td>
                     </tr>
@@ -48,7 +50,7 @@
                         <td>
                             Deadline:
                         </td>
-                        <td>
+                        <td th:text="${assignment.getDeadline()}">
                             2018/12/31 23:59:59
                         </td>
                     </tr>
@@ -71,21 +73,151 @@
                     </tr>
                     <tr>
                         <td>
-                            All score:
+                            Test file:
                         </td>
                         <td>
-
-                        </td>
+                            <input type="button" href="#" class="btn btn-primary" id="btn-downloadTestFile"
+                                   value="Download."
+                                   onclick=""></td>
                     </tr>
-                    <tr>
-                        <td>
-                            Duplicate detail:
-                        </td>
-                        <td>
 
-                        </td>
-                    </tr>
                 </table>
+
+                <div>
+                    <div>
+                        <hr/>
+                        <div style="margin-top: 20px;margin-bottom: 20px;color: black;font-size: 20px">
+                       All score :
+                   </div>
+                        <table class="table table-striped" id="table-allScoreInfo">
+                            <thead>
+                            <tr>
+                                <th>Sid</th>
+                                <th>State</th>
+                                <th>Run score</th>
+                                <th>Quality score</th>
+                                <th>Test result</th>
+                                <th>Submit file</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody-allScoreInfo">
+
+                            <tr>
+                                <td>151250199</td>
+                                <td>Submitted</td>
+                                <td>1</td>
+                                <td>0.9</td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>151250198</td>
+                                <td>NotSubmitted</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="" disabled="disabled">
+                                </td>
+
+                            </tr>
+                            <!--<tr th:each="s: ${submits}">-->
+                            <!--<td th:text="${s.sid}"></td>-->
+                            <!--<td th:text="${s.state}"></td>-->
+                            <!--<td th:text="${s.run_score}"></td>-->
+                            <!--<td th:text="${a.quality_score}"></td>-->
+                            <!--<td>-->
+                            <!--<input type="button">-->
+                            <!--</td>-->
+                            <!--<td>-->
+                            <!--<input type="button">-->
+                            <!--</td>-->
+
+                            <!--</tr>-->
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                    <div>
+
+                        <hr/>
+                        <div style="margin-top: 20px;margin-bottom: 20px;color: black;font-size: 20px">
+                            Duplicate detail :
+                        </div>
+
+                        <table class="table table-striped" id="table-duplicateDetail">
+                            <thead>
+                            <tr>
+                                <th>No.1 aid</th>
+                                <th>No.2 sid</th>
+                                <th>similar percent</th>
+                                <th>No.1 submit</th>
+                                <th>No.2 submit</th>
+                            </tr>
+                            </thead>
+                            <tbody id="tbody-duplicateDetail">
+
+                            <tr>
+                                <td>151250199</td>
+                                <td>151250198</td>
+                                <td>0.2</td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>151250199</td>
+                                <td>151250198</td>
+                                <td>0.2</td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td>151250191</td>
+                                <td>151250192</td>
+                                <td>0.1</td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+
+                            </tr>
+                            <!--<tr th:each="d: ${duplicates}">-->
+                            <!--<td th:text="${d.sid}"></td>-->
+                            <!--<td th:text="${d.similar_sid}"></td>-->
+                            <!--<td th:text="${d.s_percent}"></td>-->
+                            <!--<td>-->
+                            <!--<input type="button">-->
+                            <!--</td>-->
+                            <!--<td>-->
+                            <!--<input type="button">-->
+                            <!--</td>-->
+
+                            <!--</tr>-->
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
 
             </div>
 

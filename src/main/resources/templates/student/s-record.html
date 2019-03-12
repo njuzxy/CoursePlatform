@@ -15,49 +15,44 @@
 </head>
 <body>
 <div class="background-content">
-    <div class="header" th:include="/root/rHeader :: header"></div>
+    <div class="header" th:include="/student/sHeader :: header"></div>
 
     <div class="container mainContent">
 
-        <div class="left" th:include="/root/rLeft :: left"></div>
+        <div class="left" th:include="/student/sLeft :: left"></div>
 
         <div class="album text-muted" id="div-hot">
             <hr/>
-            <h3 id="h3-therterTabTitle">Course assignment list.</h3>
+            <h3 id="h3-therterTabTitle">Submitted record list.</h3>
             <hr/>
 
             <div id="div2-member-order">
 
-                <table class="table table-striped" id="table-orderInfo">
+                <table class="table table-striped" id="table-recordList">
                     <thead>
                     <tr>
                         <th>Aid</th>
                         <th>Title</th>
-                        <th>Intro</th>
-                        <th>Deadline</th>
-                        <th>Detail</th>
+                        <th>Time</th>
+                        <th>Submit</th>
                     </tr>
                     </thead>
                     <tbody id="tbody-all">
 
-                    <tr th:each="a, State : ${assignments}">
-                        <td th:text="${a.aid}"></td>
-                        <td th:text="${a.title}"></td>
-                        <td th:text="${a.intro}"></td>
-                        <td th:text="${a.deadline}"></td>
+                    <tr >
+                        <td >0</td>
+                        <td >assignment01</td>
+                        <td >2019-03-09 11:23:34</td>
                         <td>
-                            <span><a th:href="/root/${ctype}/${a.aid}/assignmentInfo" class="btn btn-primary" value="Detail"></a></span></td>
-
+                            <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
                     </tr>
-
-                    <!--<tr>-->
-                        <!--<td>1</td>-->
-                        <!--<td>Assignment01</td>-->
-                        <!--<td>A simple python question.</td>-->
-                        <!--<td>2018/12/30 23:59:59</td>-->
-                        <!--<td>-->
-                            <!--<span><a href="/student/151250199/assignmentInfo" class="btn btn-primary" value="Detail"></a></span></td>-->
-                    <!--</tr>-->
+                    <tr >
+                        <td >1</td>
+                        <td >assignment02</td>
+                        <td >2019-03-10 17:13:34</td>
+                        <td>
+                            <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -78,6 +73,10 @@
 </div>
 </body>
 <script type="text/javascript">
+    $("#a-t1").attr("class", "nav-link");
+    $("#a-t2").attr("class", "nav-link active");
+    $("#a-t3").attr("class", "nav-link");
+
     $(function () {
         $(".nav-link").click(function () {
             $(".nav-link active").attr("class", "nav-link");
