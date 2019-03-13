@@ -16,8 +16,9 @@ public class AssignmentEntity implements Serializable {
     private String file;
     private String testfile;
     private String state;
+    private String outpath;
 
-    public AssignmentEntity(int aid,String title, String ctype, String intro, String deadline, String file, String testfile,String state) {
+    public AssignmentEntity(int aid,String title, String ctype, String intro, String deadline, String file, String testfile,String state,String outpath) {
         this.aid=aid;
         this.title = title;
         this.ctype = ctype;
@@ -26,6 +27,15 @@ public class AssignmentEntity implements Serializable {
         this.file = file;
         this.testfile = testfile;
         this.state=state;
+        this.outpath=outpath;
+    }
+
+    public String getOutpath() {
+        return outpath;
+    }
+
+    public void setOutpath(String outpath) {
+        this.outpath = outpath;
     }
 
     public String getState() {

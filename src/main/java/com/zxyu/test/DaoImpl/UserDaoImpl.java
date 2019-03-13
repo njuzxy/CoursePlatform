@@ -131,6 +131,7 @@ public class UserDaoImpl implements UserDao {
         update.set("file",assignmentEntity.getFile());
         update.set("testfile",assignmentEntity.getTestfile());
         update.set("state",assignmentEntity.getState());
+        update.set("outpath",assignmentEntity.getOutpath());
         mongoTemplate.updateFirst(query,update,AssignmentEntity.class);
     }
 
@@ -152,6 +153,20 @@ public class UserDaoImpl implements UserDao {
     public List<UserEntity> findAllUser() {
         Query query=new Query(Criteria.where("_class").is("com.zxyu.test.Entity.UserEntity"));
         List<UserEntity>result=mongoTemplate.find(query,UserEntity.class,"student");
+        return result;
+    }
+
+    @Override
+    public List<SubmitEntity> findSubmitsBySid(String sid) {
+        Query query=new Query(Criteria.where("sid").is(sid));
+        List<SubmitEntity>result=mongoTemplate.find(query,SubmitEntity.class,"a_submit");
+        return result;
+    }
+
+    @Override
+    public List<NoticeEntity> findNoticesBySid(String sid) {
+        Query query=new Query(Criteria.where("sid").is(sid));
+        List<NoticeEntity>result=mongoTemplate.find(query,NoticeEntity.class,"notice");
         return result;
     }
 }

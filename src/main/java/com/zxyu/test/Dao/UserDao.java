@@ -43,4 +43,8 @@ public interface UserDao {
 
      List<UserEntity> findAllUser();
 
+     List<SubmitEntity> findSubmitsBySid(String sid);
+
+     List<NoticeEntity> findNoticesBySid(String sid);
+
 }
