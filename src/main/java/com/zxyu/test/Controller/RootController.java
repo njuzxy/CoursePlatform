@@ -8,6 +8,7 @@ import com.zxyu.test.Entity.SubmitEntity;
 import com.zxyu.test.Entity.UserEntity;
 import com.zxyu.test.Helper.AssistTool;
 import com.zxyu.test.Helper.MyLauncher;
+import com.zxyu.test.Helper.StateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -44,6 +45,28 @@ public class RootController {
         ModelAndView mv = new ModelAndView("/root/r-course");
         mv.addObject("sid", "root");
         mv.addObject("courses", courses);
+        return mv;
+    }
+
+    @RequestMapping(value = "/{ctype}/assignment", method = RequestMethod.GET)
+    public ModelAndView getAssignment(@PathVariable String ctype) {
+        List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
+        System.out.println("------------" + assignments.get(0).getTitle());
+        ModelAndView mv = new ModelAndView("/root/r-assignment");
+        mv.addObject("ctype", ctype);
+        mv.addObject("assignments", assignments);
+        return mv;
+    }
+
+    @RequestMapping(value = "/{ctype}/{aid}/assignmentInfo", method = RequestMethod.GET)
+    public ModelAndView getAssignmentInfo(@PathVariable String ctype, @PathVariable String aid) {
+        int aidInt = Integer.parseInt(aid);
+        ModelAndView mv = new ModelAndView("/root/r-assignmentInfo");
+        AssignmentEntity assignment = userDao.findAssignment(aidInt);
+
+
+        mv.addObject("assignment", assignment);
+
         return mv;
     }
 
@@ -149,7 +172,7 @@ public class RootController {
         String detailedFileUrl = url + "/" + fileNameD;
         String testFileUrl = url + "/" + fileNameT;
         int aid = userDao.findCourseNextAid();
-        AssignmentEntity assignment = new AssignmentEntity(aid, title, courseType, description, deadlineD, detailedFileUrl, testFileUrl);
+        AssignmentEntity assignment = new AssignmentEntity(aid, title, courseType, description, deadlineD, detailedFileUrl, testFileUrl, assistTool.enum2Str(StateEnum.Published));
         userDao.addAssignment(assignment);
 
         try {

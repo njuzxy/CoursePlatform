@@ -4,20 +4,35 @@
         <nav class="d-none d-sm-block bg-light sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a id="a-t1" class="nav-link active" href="/student/151250199/course">My Courses</a>
+                    <a id="a-t1" class="nav-link active" th:href="@{'/student/'+${sid}+'/course'}">My Courses</a>
                     <span class="sr-only">(current)</span>
                 </li>
             </ul>
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a id="a-t2" class="nav-link" href="">Submit records</a>
+                    <a id="a-t2" class="nav-link" th:href="@{'/student/'+${sid}+'/record'}">Submit records</a>
                 </li>
             </ul>
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a id="a-t3" class="nav-link" href="">Notice</a>
+                    <a id="a-t3" class="nav-link" th:href="@{'/student/'+${sid}+'/notice'}">Notice</a>
                 </li>
             </ul>
         </nav>
     </div>
 </div>
+
+
+<script type="text/javascript">
+
+    $("#a-t1").attr("class", "nav-link active");
+    $("#a-t2").attr("class", "nav-link");
+    $("#a-t3").attr("class", "nav-link");
+
+    $(function () {
+        $(".nav-link").click(function () {
+            $(".nav-link active").attr("class", "nav-link");
+            $(this).attr("class", "nav-link active");
+        });
+    });
+</script>

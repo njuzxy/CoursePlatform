@@ -35,7 +35,7 @@
                 <div class="row">
 
                     <div class="card" th:each="c, State : ${courses}">
-                        <a href="/root/${c.ctype}/assignment" class="course_type" th:text="${c.ctype}"></a>
+                        <a th:href="@{'/root/'+${c.ctype}+'/assignment'}" class="course_type" th:text="${c.ctype}"></a>
                     </div>
 
                     <!--

@@ -2,10 +2,7 @@ package com.zxyu.test.Controller;
 
 import ch.ethz.ssh2.Session;
 import com.zxyu.test.Dao.UserDao;
-import com.zxyu.test.Entity.AssignmentEntity;
-import com.zxyu.test.Entity.CourseEntity;
-import com.zxyu.test.Entity.SubmitEntity;
-import com.zxyu.test.Entity.UserEntity;
+import com.zxyu.test.Entity.*;
 import com.zxyu.test.Helper.AssistTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -54,7 +51,7 @@ public class StudentController {
     public ModelAndView getAssignment(@PathVariable String sid, @PathVariable String ctype) {
         List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
         System.out.println("------------" + assignments.get(0).getTitle());
-        ModelAndView mv = new ModelAndView("/student/s-courseInfo");
+        ModelAndView mv = new ModelAndView("/student/s-assignment");
         mv.addObject("sid", sid);
         mv.addObject("ctype", ctype);
         mv.addObject("assignments", assignments);
@@ -90,6 +87,21 @@ public class StudentController {
         return mv;
     }
 
+    @RequestMapping(value = "/{sid}/record", method = RequestMethod.GET)
+    public ModelAndView getRecord(@PathVariable String sid) {
+//        List<SubmitEntity> submits=userDao.findSubmitBySid(sid);
+        ModelAndView mv = new ModelAndView("/student/s-record");
+//        mv.addObject("records",submits);
+        return mv;
+    }
+
+    @RequestMapping(value = "/{sid}/notice", method = RequestMethod.GET)
+    public ModelAndView getNotice(@PathVariable String sid) {
+//        List<NoticeEntity> notices=userDao.findNoticeBySid(sid);
+        ModelAndView mv = new ModelAndView("/student/s-notice");
+//        mv.addObject("notices",notices);
+        return mv;
+    }
 
     @ResponseBody
     @RequestMapping(value = "/submitAssignment", method = RequestMethod.POST)

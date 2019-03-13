@@ -65,4 +65,8 @@ public class AssistTool {
         return dateFormat.format(date);
     }
 
+    public String enum2Str(StateEnum state){
+        return String.valueOf(state);
+    }
+
 }
