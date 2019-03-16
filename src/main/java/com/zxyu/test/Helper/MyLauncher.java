@@ -5,7 +5,10 @@ import org.apache.spark.launcher.SparkAppHandle;
 import org.apache.spark.launcher.SparkLauncher;
 
 
-
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -13,6 +16,9 @@ import java.util.concurrent.TimeUnit;
 public class MyLauncher {
     public static void main(String args[]) throws Exception{
         String path=args[1];//System.getProperty("user.dir")+"\\src\\main\\java\\com\\zxyu\\test\\jars\\example.jar";
+        String outPath=args[2];
+        File file=new File(path);
+        String sid=file.getName().substring(0,file.getName().lastIndexOf("."));
         System.out.println(path);
         CountDownLatch countDownLatch = new CountDownLatch(1);
         //HashMap env=new HashMap();
@@ -30,7 +36,28 @@ public class MyLauncher {
                    public void stateChanged(SparkAppHandle sparkAppHandle) {
                        if (sparkAppHandle.getState().isFinal()) {
                            countDownLatch.countDown();
+                           if("FAILED".equalsIgnoreCase(sparkAppHandle.getState().toString())){
+                               File out=new File(outPath+"\\"+sid+".txt");
+                               if(!out.exists()){
+                                   File dir=new File(out.getParent());
+                                   dir.mkdirs();
+                                   try {
+                                       out.createNewFile();
+                                   } catch (IOException e) {
+                                       e.printStackTrace();
+                                   }
+                               }
+                               try {
+                                   Writer writer=new FileWriter(out);
+                                   writer.write("任务执行失败");
+                                   writer.flush();
+                                   writer.close();
+                               } catch (IOException e) {
+                                   e.printStackTrace();
+                               }
+                           }
                        }
+
                        System.out.println("state:" + sparkAppHandle.getState().toString());
                    }
 
@@ -54,8 +81,19 @@ public class MyLauncher {
         System.out.println("current state:"+handle.getState().toString());
 
         boolean s=countDownLatch.await(1, TimeUnit.MINUTES);
-        if(!s)
+        if(!s){
+            File out=new File(outPath+"\\"+sid+".txt");
+            if(!out.exists()){
+                File dir=new File(out.getParent());
+                dir.mkdirs();
+                out.createNewFile();
+            }
+            Writer writer=new FileWriter(out);
+            writer.write("任务执行超时");
+            writer.flush();
+            writer.close();
             System.out.println("任务执行超时");
+        }
         else
             System.out.println("The task is finished!");
 
