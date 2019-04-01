@@ -6,7 +6,7 @@ import java.util.List;
 
 public class PyQualityHelper {
     private String dir;
-    private static final String confPath = "";
+    private static final String confPath = System.getProperty("user.dir")+"\\src\\main\\java\\com\\zxyu\\test\\Helper\\pylint.conf";
     private List<Object[]> list;
 
     public PyQualityHelper(String python_dir) {

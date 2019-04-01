@@ -8,7 +8,7 @@ import java.util.List;
 
 public class JavaQualityHelper {
     private String dir;
-    private static final String rulePath="c:\\Users\\zxyu\\Desktop\\rule.xml";
+    private static final String rulePath=System.getProperty("user.dir")+"\\src\\main\\java\\com\\zxyu\\test\\Helper\\rule.xml";
     private List<Object[]> list;
 
     public JavaQualityHelper(String java_dir){
