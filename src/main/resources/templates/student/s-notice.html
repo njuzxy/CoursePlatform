@@ -9,9 +9,9 @@
     <script src="/public/jquery/jquery.min.js"></script>
     <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
-    <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/style.css">
+    <link rel='stylesheet' href="/css/student.css">
 </head>
 <body>
 <div class="background-content">
@@ -39,30 +39,31 @@
                     </tr>
                     </thead>
                     <tbody id="tbody-all">
-                    <tr >
-                        <td >1</td>
-                        <td >2019-03-01 12:12:33</td>
-                        <td >Already scored.</td>
-                        <td >Unread</td>
-                        <td>
-                            <input type="button" href="#" class="btn btn-primary" value="Check." onclick="">
-                    </tr>
-                    <tr >
-                        <td >2</td>
-                        <td >2019-03-03 09:42:33</td>
-                        <td >Already scored.</td>
-                        <td >Unread</td>
-                        <td>
-                            <input type="button" href="#" class="btn btn-primary" value="Check." onclick="">
-                    </tr>
-                    <!--<tr th:each="n : ${notices}">-->
-                        <!--<td th:text="${n.aid}"></td>-->
-                        <!--<td th:text="${n.time}"></td>-->
-                        <!--<td th:text="${n.text}"></td>-->
-                        <!--<td th:text="${n.state}"></td>-->
-                        <!--<td>-->
-                            <!--<input type="button" href="#" class="btn btn-primary" value="Check." onclick="">-->
+                    <!--<tr >-->
+                    <!--<td >1</td>-->
+                    <!--<td >2019-03-01 12:12:33</td>-->
+                    <!--<td >Already scored.</td>-->
+                    <!--<td >Unread</td>-->
+                    <!--<td>-->
+                    <!--<input type="button" href="#" class="btn btn-primary" value="Check." onclick="">-->
                     <!--</tr>-->
+                    <!--<tr >-->
+                    <!--<td >2</td>-->
+                    <!--<td >2019-03-03 09:42:33</td>-->
+                    <!--<td >Already scored.</td>-->
+                    <!--<td >Unread</td>-->
+                    <!--<td>-->
+                    <!--<input type="button" href="#" class="btn btn-primary" value="Check." onclick="">-->
+                    <!--</tr>-->
+
+                    <tr th:each="n : ${notices}">
+                        <td th:text="${n.aid}"></td>
+                        <td th:text="${n.time}"></td>
+                        <td th:text="${n.text}"></td>
+                        <td th:text="${n.state}"></td>
+                        <td>
+                            <input type="button" href="#" class="btn btn-primary" value="Check." onclick="">
+                    </tr>
 
                     </tbody>
                 </table>

@@ -2,13 +2,8 @@ package com.zxyu.test.Controller;
 
 import com.zxyu.test.Dao.FileDao;
 import com.zxyu.test.Dao.UserDao;
-import com.zxyu.test.Entity.AssignmentEntity;
-import com.zxyu.test.Entity.CourseEntity;
-import com.zxyu.test.Entity.SubmitEntity;
-import com.zxyu.test.Entity.UserEntity;
-import com.zxyu.test.Helper.AssistTool;
-import com.zxyu.test.Helper.MyLauncher;
-import com.zxyu.test.Helper.StateEnum;
+import com.zxyu.test.Entity.*;
+import com.zxyu.test.Helper.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -24,6 +19,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.zxyu.test.Helper.AssistTool.innerUrl;
+import static com.zxyu.test.Helper.AssistTool.tempUrl;
+
 @Controller
 @EnableAutoConfiguration
 @RequestMapping("/root")
@@ -37,8 +35,6 @@ public class RootController {
 
     private AssistTool assistTool = new AssistTool();
 
-    String localpath = System.getProperty("user.dir");
-
     @RequestMapping(value = "/course", method = RequestMethod.GET)
     public ModelAndView getCourse() {
         List<CourseEntity> courses = userDao.findAllCourse();
@@ -51,8 +47,11 @@ public class RootController {
     @RequestMapping(value = "/{ctype}/assignment", method = RequestMethod.GET)
     public ModelAndView getAssignment(@PathVariable String ctype) {
         List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
-        System.out.println("------------" + assignments.get(0).getTitle());
+        if (assignments.size() > 0) {
+            System.out.println("------------" + assignments.get(0).getTitle());
+        }
         ModelAndView mv = new ModelAndView("/root/r-assignment");
+        mv.addObject("sid", "root");
         mv.addObject("ctype", ctype);
         mv.addObject("assignments", assignments);
         return mv;
@@ -62,6 +61,7 @@ public class RootController {
     public ModelAndView getAssignmentInfo(@PathVariable String ctype, @PathVariable String aid) {
         int aidInt = Integer.parseInt(aid);
         ModelAndView mv = new ModelAndView("/root/r-assignmentInfo");
+        mv.addObject("sid", "root");
         AssignmentEntity assignment = userDao.findAssignment(aidInt);
 
 
@@ -70,21 +70,81 @@ public class RootController {
         return mv;
     }
 
-
     @RequestMapping(value = "/publishAssignment", method = RequestMethod.GET)
     public ModelAndView getPublishAssignment() {
+        List<CourseEntity> courses = userDao.findAllCourse();
         ModelAndView mv = new ModelAndView("/root/publishAssignment");
         mv.addObject("sid", "root");
+        mv.addObject("courses", courses);
         return mv;
     }
 
-
-    @RequestMapping(value = "/figureAssignment", method = RequestMethod.GET)
-    public ModelAndView getFigureAssignment() {
+    @RequestMapping(value = "/figureAssignments", method = RequestMethod.GET)
+    public ModelAndView getFigureAssignments() {
+        List<CourseEntity> courses = userDao.findAllCourse();
         ModelAndView mv = new ModelAndView("/root/figureAssignment");
         mv.addObject("sid", "root");
+        mv.addObject("courses", courses);
+
         return mv;
     }
+
+    @RequestMapping(value = "/figureAssignment", method = RequestMethod.GET)
+    public ModelAndView getFigureAssignment(@RequestParam("ctype") String ctype, HttpServletRequest req, HttpServletResponse resp) {
+//        String state = req.getParameter("assignmentState");
+
+        List<CourseEntity> courses = userDao.findAllCourse();
+        List<AssignmentEntity> assignments = new ArrayList<>();
+        if (ctype == null) {
+            System.out.println("ctype now is : " + ctype);
+            ctype = courses.get(0).getCtype();
+            assignments = userDao.findAllAssignment(ctype);
+        } else {
+            System.out.println("ctype now is : " + ctype);
+            assignments = userDao.findAllAssignment(ctype);
+        }
+        List<AssignmentEntity> assignmentsPublished = new ArrayList<>();
+        List<AssignmentEntity> assignmentsEnd = new ArrayList<>();
+        List<AssignmentEntity> assignmentsFinished = new ArrayList<>();
+        List<AssignmentEntity> assignmentsScoring = new ArrayList<>();
+        List<AssignmentEntity> assignmentsScored = new ArrayList<>();
+        for (int i = 0; i < assignments.size(); i++) {
+            switch (assignments.get(i).getState()) {
+                case "Published":
+                    assignmentsPublished.add(assignments.get(i));
+                    break;
+                case "End":
+                    assignmentsEnd.add(assignments.get(i));
+                    break;
+                case "Finished":
+                    assignmentsFinished.add(assignments.get(i));
+                    break;
+                case "Scoring":
+                    assignmentsScoring.add(assignments.get(i));
+                    break;
+                case "Scored":
+                    assignmentsScored.add(assignments.get(i));
+                    break;
+            }
+        }
+
+        ModelAndView mv = new ModelAndView("/root/figureAssignment");
+        mv.addObject("sid", "root");
+        mv.addObject("courses", courses);
+        mv.addObject("ctype", ctype);
+        mv.addObject("assignments", assignments);
+        mv.addObject("assignmentsPublished", assignmentsPublished);
+        mv.addObject("assignmentsEnd", assignmentsEnd);
+        mv.addObject("assignmentsFinished", assignmentsFinished);
+        mv.addObject("assignmentsScoring", assignmentsScoring);
+        mv.addObject("assignmentsScored", assignmentsScored);
+
+
+        System.out.println("TEST*******************");
+
+        return mv;
+    }
+
 
     @RequestMapping(value = "/manageUser", method = RequestMethod.GET)
     public ModelAndView getManageUser() {
@@ -122,6 +182,7 @@ public class RootController {
                                   @RequestParam("latePercent") String latePercent,
                                   @RequestParam("detailedFile") MultipartFile detailedFile,
                                   @RequestParam("testFile") MultipartFile testFile,
+                                  @RequestParam("outputUrl") String outputUrl,
                                   HttpServletRequest request,
                                   HttpServletResponse response) {
         response.setCharacterEncoding("UTF-8");
@@ -139,10 +200,20 @@ public class RootController {
             }
         }
 
+        int aid = userDao.findCourseNextAid();
+
         String deadlineD = deadline + ";" + lateTime + ";" + latePercent;
 
 
-        String url = "/src/main/java/com/zxyu/test/jars/" + courseType + "/" + title;
+        String url = innerUrl + courseType + "/" + aid;
+        //创建submit和txt质量/查重输入输出目录
+        assistTool.createDir(url);
+        assistTool.createDir(url + "/submit");
+        assistTool.createDir(url + "/txt/java");
+        assistTool.createDir(url + "/txt/python");
+        assistTool.createDir(url + "/txt/javaquality");
+        assistTool.createDir(url + "/txt/pythonquality");
+
         String fileNameD = detailedFile.getOriginalFilename();
         String fileNameT = testFile.getOriginalFilename();
         boolean detailedResult = assistTool.saveFile(url, detailedFile, fileNameD);
@@ -171,13 +242,12 @@ public class RootController {
 
         String detailedFileUrl = url + "/" + fileNameD;
         String testFileUrl = url + "/" + fileNameT;
-        int aid = userDao.findCourseNextAid();
-        AssignmentEntity assignment = new AssignmentEntity(aid, title, courseType, description, deadlineD, detailedFileUrl, testFileUrl, assistTool.enum2Str(StateEnum.Published));
+        AssignmentEntity assignment = new AssignmentEntity(aid, title, courseType, description, deadlineD, detailedFileUrl, testFileUrl, assistTool.enum2Str(StateEnum.Published), outputUrl);
         userDao.addAssignment(assignment);
 
         try {
             out = response.getWriter();
-            out.print("<script> window.location.href='#';</script>");
+            out.print("<script> window.location.href='/root/course';</script>");
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -186,24 +256,62 @@ public class RootController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/figureAssignments", method = RequestMethod.POST)
+    @RequestMapping(value = "/figureAssignmentsAct", method = RequestMethod.POST)
     public void figureAssignments(HttpServletRequest request,
                                   HttpServletResponse response) throws Exception {
         String[] figureAidsStr = request.getParameterValues("figureAid");
         int[] figureAids = new int[figureAidsStr.length];
         for (int i = 0; i < figureAidsStr.length; i++) {
             figureAids[i] = Integer.parseInt(figureAidsStr[i]);
-            System.out.println("figureAids["+i+"] = "+figureAids[i]);
+            System.out.println("figureAids[" + i + "] = " + figureAids[i]);
         }
-        for(int i =0;i<figureAids.length;i++){
-            List<SubmitEntity> submits=userDao.findAllSubmit(figureAids[i]);
-            for(int j=0;j<submits.size();j++){
-                String args[]=new String[2];
-                args[0]=submits.get(j).getLanguage();
-                args[1]=localpath+"/"+submits.get(j).getFile();
-                MyLauncher.main(args);
+        for (int i = 0; i < figureAids.length; i++) {
+            int aidNow = figureAids[i];
+            AssignmentEntity assignment = userDao.findAssignment(aidNow);
+            //更新作业状态为scoring
+            assignment.setState(assistTool.enum2Str(StateEnum.Scoring));
+            userDao.updateAssignment(assignment);
+
+            //run_score
+            RunScoreHelper runScoreHelper = new RunScoreHelper(assignment.getOutpath(), assignment.getTestfile(), aidNow);
+            //private 计算方法无法调用
+            List<Object[]> run_scores = runScoreHelper.getList();//aid,sid,score
+            assistTool.updateScore(run_scores,aidNow,StateEnum.Run);
+
+            //quality_score java
+            String java_dirNow = tempUrl + innerUrl + "/"+assignment.getCtype()+"/"+aidNow+"/txt/java";
+            JavaQualityHelper javaQualityHelper = new JavaQualityHelper(java_dirNow);
+            List<Object[]> java_scores=javaQualityHelper.getList();
+            assistTool.updateScore(java_scores,aidNow,StateEnum.Quality);
+
+            //quality_score python
+            String py_dirNow = tempUrl + innerUrl + "/"+assignment.getCtype()+"/"+aidNow+"/txt/python";
+            PyQualityHelper pyQualityHelper = new PyQualityHelper(py_dirNow);
+            List<Object[]> py_scores=pyQualityHelper.getList();
+            assistTool.updateScore(py_scores,aidNow,StateEnum.Quality);
+
+            //更新作业状态为scored
+            assignment.setState(assistTool.enum2Str(StateEnum.Scored));
+            userDao.updateAssignment(assignment);
+
+            //作业出分同时发送通知
+            List<NoticeEntity> notices=new ArrayList<>();
+            List<UserEntity> students=userDao.findAllUser();
+            for(int j=0;j<students.size();j++){
+                String info=assignment.getCtype()+" "+assignment.getTitle()+" "+aidNow+" has been scored.";
+                NoticeEntity notice = new NoticeEntity(aidNow,students.get(j).getSid(),new Date(),info,assistTool.enum2Str(StateEnum.Unread));
+                notices.add(notice);
             }
+            userDao.addNotices(notices);
         }
+
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
+        PrintWriter out = null;
+        out = response.getWriter();
+        out.print("<script>alert('Figure assignments success!');" +
+                "window.location.href='/root/figureAssignments';</script>");
+        out.flush();
 
     }
 
@@ -246,7 +354,7 @@ public class RootController {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         PrintWriter out = null;
 
-        String url = "/src/main/java/com/zxyu/test/jars/addUserFile/";
+        String url = innerUrl + "addUserFile/";
         String fileNameU = "users_" + assistTool.formatDate(new Date(), "YYYYMMDDHHmmss") + ".txt";
         boolean addUserResult = assistTool.saveFile(url, userFile, fileNameU);
         if (!addUserResult) {
@@ -261,7 +369,7 @@ public class RootController {
             }
         }
 
-        String userFileUrl = localpath + url + "/" + fileNameU;
+        String userFileUrl = tempUrl + url + "/" + fileNameU;
         ArrayList<String> users = assistTool.readUserFile(userFileUrl);
         for (int i = 0; i < users.size(); i++) {
             if (userDao.findUser(users.get(i)) == null) {

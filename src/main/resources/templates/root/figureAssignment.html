@@ -11,9 +11,9 @@
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
     <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
     <link rel='stylesheet' href="/css/style.css">
     <link rel='stylesheet' href="/css/root.css">
+    <link rel="script" href="/js/jsFigureA.js">
 
 </head>
 <body>
@@ -30,53 +30,89 @@
 
         <div class="div-alignLeft">
             <span>Course &emsp;&emsp;&nbsp;type : </span>&emsp;
-        <select id="select-courseTypeFigure" name="courseTypeFigure" value="">
-            <option value="All">All</option>
-            <option value="Statistics">Statistics</option>
-            <option value="Cloud">Cloud</option>
-        </select>
+            <select id="select-courseTypeFigure" name="courseTypeFigure" value="">
+                <option th:text="please_choose"></option>
+                <option th:each="c : ${courses}"
+                        th:value="${c.ctype}" th:text="${c.ctype}">
+                </option>
+                <!--<option value="Statistics">Statistics</option>-->
+                <!--<option value="Cloud">Cloud</option>-->
+            </select>
         </div>
 
         <div class="div-alignLeft">
             <span>Assignment state : </span>&emsp;
-        <input type="radio" th:text="all"  name="assignmentState" checked="checked">&emsp;
-        <input type="radio" th:text="Published" name="assignmentState">&emsp;
-        <input type="radio" th:text="End" name="assignmentState">&emsp;
-        <input type="radio" th:text="Finished" name="assignmentState">&emsp;
-        <input type="radio" th:text="Scored" name="assignmentState">
+            <input type="radio" th:value="All" th:text="All" name="assignmentState" checked="checked">&emsp;
+            <input type="radio" th:value="Published" th:text="Published" name="assignmentState">&emsp;
+            <input type="radio" th:value="End" th:text="End" name="assignmentState">&emsp;
+            <input type="radio" th:value="Finished" th:text="Finished" name="assignmentState">&emsp;
+            <input type="radio" th:value="Scoring" th:text="Scoring" name="assignmentState">&emsp;
+            <input type="radio" th:value="Scored" th:text="Scored" name="assignmentState">
         </div>
         <div id="div-figureAssignment">
-            <form action="/root/figureAssignments" method="post">
-            <table class="table table-striped" id="table-figureAssignment">
-                <thead>
-                <tr>
-                    <th>Choose</th>
-                    <th>Aid</th>
-                    <th>Ctype</th>
-                    <th>Title</th>
-                    <th>Deadline</th>
-                    <th>State</th>
-                </tr>
-                </thead>
-                <tbody id="tbody-all">
-                <tr>
-                    <td><input type="checkbox" name="figureAid" value="1"></td>
-                    <td>1</td>
-                    <td>Cloud</td>
-                    <td>Assignment01</td>
-                    <td>2018/12/30 23:59:59</td>
-                    <td>End</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" name="figureAid" value="2"></td>
-                    <td>2</td>
-                    <td>Cloud</td>
-                    <td>Assignment02</td>
-                    <td>2018/12/30 23:59:59</td>
-                    <td>End</td>
-                </tr>
-                </tbody>
-            </table>
+            <form action="/root/figureAssignmentsAct" method="post">
+                <table class="table table-striped" id="table-figureAssignment">
+                    <thead>
+                    <tr>
+                        <th>Choose</th>
+                        <th>Aid</th>
+                        <th>Ctype</th>
+                        <th>Title</th>
+                        <th>Deadline</th>
+                        <th>State</th>
+                    </tr>
+                    </thead>
+                    <tbody id="tbody-published">
+                    <tr th:each="a : ${assignmentsPublished}">
+                        <td><input type="checkbox" name="figureAid" value="1" disabled="disabled"></td>
+                        <td th:text="${a.aid}">1</td>
+                        <td th:text="${a.ctype}">Cloud</td>
+                        <td th:text="${a.title}">Assignment01</td>
+                        <td th:text="${a.deadline}">2018/12/30 23:59:59</td>
+                        <td th:text="${a.state}">End</td>
+                    </tr>
+                    </tbody>
+                    <tbody id="tbody-end">
+                    <tr th:each="a : ${assignmentsEnd}">
+                        <td><input type="checkbox" name="figureAid" value="1"></td>
+                        <td th:text="${a.aid}">1</td>
+                        <td th:text="${a.ctype}">Cloud</td>
+                        <td th:text="${a.title}">Assignment01</td>
+                        <td th:text="${a.deadline}">2018/12/30 23:59:59</td>
+                        <td th:text="${a.state}">End</td>
+                    </tr>
+                    </tbody>
+                    <tbody id="tbody-finished">
+                    <tr th:each="a : ${assignmentsFinished}">
+                        <td><input type="checkbox" name="figureAid" value="1"></td>
+                        <td th:text="${a.aid}">1</td>
+                        <td th:text="${a.ctype}">Cloud</td>
+                        <td th:text="${a.title}">Assignment01</td>
+                        <td th:text="${a.deadline}">2018/12/30 23:59:59</td>
+                        <td th:text="${a.state}">End</td>
+                    </tr>
+                    </tbody>
+                    <tbody id="tbody-scoring">
+                    <tr th:each="a : ${assignmentsScoring}">
+                        <td><input type="checkbox" name="figureAid" value="1" disabled="disabled"></td>
+                        <td th:text="${a.aid}">1</td>
+                        <td th:text="${a.ctype}">Cloud</td>
+                        <td th:text="${a.title}">Assignment01</td>
+                        <td th:text="${a.deadline}">2018/12/30 23:59:59</td>
+                        <td th:text="${a.state}">End</td>
+                    </tr>
+                    </tbody>
+                    <tbody id="tbody-scored">
+                    <tr th:each="a : ${assignmentsScored}">
+                        <td><input type="checkbox" name="figureAid" value="1" disabled="disabled"></td>
+                        <td th:text="${a.aid}">1</td>
+                        <td th:text="${a.ctype}">Cloud</td>
+                        <td th:text="${a.title}">Assignment01</td>
+                        <td th:text="${a.deadline}">2018/12/30 23:59:59</td>
+                        <td th:text="${a.state}">End</td>
+                    </tr>
+                    </tbody>
+                </table>
                 <input type="submit" class="btn btn-primary" id="btn-addFigure" value="Figure.">
             </form>
 
@@ -93,7 +129,79 @@
 
 </div>
 </body>
-<script type="text/javascript">
+<script type="text/javascript" th:inline="javascript">
+
+    var ctypeNow=[[${ctype}]];
+    $("#select-courseTypeFigure[name='courseTypeFigure']").val(ctypeNow);
+    // alert("ctype now is : "+ctypeNow);
+
+    var req = new XMLHttpRequest();
+    var selectId = document.getElementById("select-courseTypeFigure");//获取ID
+    selectId.onchange = function ()//触发事件
+    {
+        var ctype = selectId.options[selectId.selectedIndex].innerHTML;//获取选中文本
+        // alert(ctype);
+
+        // $.ajax({
+        //     type: "post",
+        //     data: {courseType: ctype},  //获取商品id
+        //     url: "/root/figureAssignment",  //调用后台方法
+        //     dataType: "json",
+        //     success: function (data) {  //data是后台方法执行后的返回值
+        //         if (data.status == 1) {
+        //             $("#table-figureAssignment").load(location.href + " #table-figureAssignment");  //这里是第一次用的局部刷新
+        //             window.location.reload();  //刷新当前页面（这是最新加的刷新页面，自动执行完就可以二次点击了）
+        //         }
+        //     }
+        // });
+
+        window.location.href='/root/figureAssignment?ctype='+ctype;
+
+    }
+
+
+    $(':radio').click(function () {
+        var state = $(this).val();
+        // alert(state);
+
+        if(state==="All"){
+            $("#tbody-published").show();
+            $("#tbody-end").show();
+            $("#tbody-finished").show();
+            $("#tbody-scoring").show();
+            $("#tbody-scored").show();
+        } else if(state==="Published"){
+            $("#tbody-published").show();
+            $("#tbody-end").hide();
+            $("#tbody-finished").hide();
+            $("#tbody-scoring").hide();
+            $("#tbody-scored").hide();
+        }else if(state==="End"){
+            $("#tbody-published").hide();
+            $("#tbody-end").show();
+            $("#tbody-finished").hide();
+            $("#tbody-scoring").hide();
+            $("#tbody-scored").hide();
+        }else if(state==="Finished"){
+            $("#tbody-published").hide();
+            $("#tbody-end").hide();
+            $("#tbody-finished").show();
+            $("#tbody-scoring").hide();
+            $("#tbody-scored").hide();
+        }else if(state==="Scoring"){
+            $("#tbody-published").hide();
+            $("#tbody-end").hide();
+            $("#tbody-finished").hide();
+            $("#tbody-scoring").show();
+            $("#tbody-scored").hide();
+        }else if(state==="Scored"){
+            $("#tbody-published").hide();
+            $("#tbody-end").hide();
+            $("#tbody-finished").hide();
+            $("#tbody-scoring").hide();
+            $("#tbody-scored").show();
+        }
+    });
 
     $("#a-t1").attr("class", "nav-link");
     $("#a-t2").attr("class", "nav-link");

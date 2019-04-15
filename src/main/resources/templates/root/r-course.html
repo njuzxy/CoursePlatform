@@ -11,7 +11,6 @@
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
     <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
     <link rel='stylesheet' href="/css/style.css">
     <link rel='stylesheet' href="/css/root.css">
 
@@ -34,7 +33,7 @@
             <div class="container-card">
                 <div class="row">
 
-                    <div class="card" th:each="c, State : ${courses}">
+                    <div class="card" th:each="c : ${courses}">
                         <a th:href="@{'/root/'+${c.ctype}+'/assignment'}" class="course_type" th:text="${c.ctype}"></a>
                     </div>
 

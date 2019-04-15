@@ -9,9 +9,9 @@
     <script src="/public/jquery/jquery.min.js"></script>
     <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
-    <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/style.css">
+    <link rel='stylesheet' href="/css/student.css">
 </head>
 <body>
 <div class="background-content">
@@ -32,6 +32,7 @@
                     <thead>
                     <tr>
                         <th>Aid</th>
+                        <th>Ctype</th>
                         <th>Title</th>
                         <th>Time</th>
                         <th>Submit</th>
@@ -39,20 +40,30 @@
                     </thead>
                     <tbody id="tbody-all">
 
-                    <tr >
-                        <td >0</td>
-                        <td >assignment01</td>
-                        <td >2019-03-09 11:23:34</td>
+                    <!--<tr >-->
+                    <!--<td >0</td>-->
+                    <!--<td >assignment01</td>-->
+                    <!--<td >2019-03-09 11:23:34</td>-->
+                    <!--<td>-->
+                    <!--<input type="button" href="#" class="btn btn-primary" value="Download." onclick="">-->
+                    <!--</tr>-->
+                    <!--<tr >-->
+                    <!--<td >1</td>-->
+                    <!--<td >assignment02</td>-->
+                    <!--<td >2019-03-10 17:13:34</td>-->
+                    <!--<td>-->
+                    <!--<input type="button" href="#" class="btn btn-primary" value="Download." onclick="">-->
+                    <!--</tr>-->
+
+                    <tr th:each="r : ${records}">
+                        <td th:text="${r.aid}">1</td>
+                        <td>ctype</td>
+                        <td>title</td>
+                        <td th:text="${r.time}">2019-03-10 17:13:34</td>
                         <td>
                             <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
                     </tr>
-                    <tr >
-                        <td >1</td>
-                        <td >assignment02</td>
-                        <td >2019-03-10 17:13:34</td>
-                        <td>
-                            <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
-                    </tr>
+
                     </tbody>
                 </table>
             </div>

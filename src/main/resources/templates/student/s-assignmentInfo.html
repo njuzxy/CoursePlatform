@@ -9,9 +9,9 @@
     <script src="/public/jquery/jquery.min.js"></script>
     <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
-    <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/style.css">
+    <link rel='stylesheet' href="/css/student.css">
 </head>
 <body>
 <div class="background-content">
@@ -56,7 +56,8 @@
                         <td>
                             Late rule:
                         </td>
-                        <!--<td th:text="${assignment.get()}">--><td>
+                        <!--<td th:text="${assignment.get()}">-->
+                        <td>
                             24h/80%
                         </td>
                     </tr>
@@ -65,9 +66,9 @@
                             Detailed file:
                         </td>
                         <td>
-                            <input type="button" href="#" class="btn btn-primary" id="btn-downloadDetailedFile"
+                            <input type="submit" href="#" class="btn btn-primary" id="btn-downloadDetailedFile"
                                    value="Download."
-                                   onclick=""></td>
+                                   th:onclick="|downloadDetailedFile(${assignment.getAid()})|"></td>
                     </tr>
                     <tr>
                         <td>
@@ -171,6 +172,27 @@
     </div>
 </div>
 </body>
+
+<script type="text/javascript" th:inline="javascript">
+
+    function downloadDetailedFile(aid) {
+        $.ajax({
+            type: "POST",
+            data: {aid: aid},
+            url: "/student/downloadDetailedFile",
+            success: function (data) {
+                // if (data == "认证成功") {
+                //     window.location.href = ("/admin/corp/list");
+                // } else {
+                //     alert("认证失败");
+                // }
+            },
+            error: function (data) {
+                // alert("认证失败");
+            }
+        });
+    }
+</script>
 <script type="text/javascript">
     $(function () {
         $(".nav-link").click(function () {

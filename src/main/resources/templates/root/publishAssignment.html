@@ -11,7 +11,6 @@
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
     <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
     <link rel='stylesheet' href="/css/style.css">
     <link rel='stylesheet' href="/css/root.css">
 
@@ -29,7 +28,7 @@
         <hr/>
         <div id="div-publish-show">
             <form class="form-class" id="form-publishShow" method="post" enctype="multipart/form-data">
-                <table id="table-publish-show" cellpadding="15" cellspacing="10" rules="none">
+                <table id="table-publish-assignment" cellpadding="15" cellspacing="10" rules="none">
                     <tr>
                         <td class="td-assignmentLeft">
                             Title:
@@ -45,9 +44,14 @@
                         </td>
                         <td>
                             <select id="select-courseType" name="courseType" value="">
-                                <option value="Statistics">Statistics</option>
-                                <option value="Cloud">Cloud</option>
+                                <!--<option value="">请选择</option>-->
+                                <option th:each="c : ${courses}"
+                                        th:value="${c.ctype}" th:text="${c.ctype}">
+                                </option>
+                                <!--<option value="Statistics">Statistics</option>-->
+                                <!--<option value="Cloud">Cloud</option>-->
                             </select>
+
                         </td>
                     </tr>
                     <tr>
@@ -97,6 +101,14 @@
                         <td>
                             <input type="file" class="btn btn-primary" id="btn-testFile"
                                    value="Choose file." name="testFile"></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Output url:
+                        </td>
+                        <td>
+                            <input id="input-outputUrl" type="text" name="outputUrl">
+                        </td>
                     </tr>
                 </table>
                 <input type="submit" class="btn btn-primary" id="btn-confirmPublish" value="Confirm.">

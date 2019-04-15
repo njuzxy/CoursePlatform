@@ -9,9 +9,9 @@
     <script src="/public/jquery/jquery.min.js"></script>
     <script src="/public/bootstrap-4/js/bootstrap.min.js"></script>
     <link rel='stylesheet' href='/public/bootstrap-4/css/bootstrap.min.css'/>
-    <link rel='stylesheet' href='/css/style.css'/>
     <link rel="icon" href="/image/favicon.ico"/>
-    <link rel='stylesheet' href="/css/homepage.css">
+    <link rel='stylesheet' href="/css/style.css">
+    <link rel='stylesheet' href="/css/student.css">
 </head>
 <body>
 <div class="background-content">
@@ -29,7 +29,8 @@
                     <div class="card" th:each="c : ${courses}">
                         <!--<a class="course_type" th:text="${c.getCtype()}"></a>-->
 
-                        <a th:href="@{'/student/'+${sid}+'/'+${c.getCtype()}+'/assignment'}" class="course_type" th:text="${c.getCtype()}"></a>
+                        <a th:href="@{'/student/'+${sid}+'/'+${c.getCtype()}+'/assignment'}" class="course_type"
+                           th:text="${c.getCtype()}"></a>
                     </div>
                     <!--<div class="card">-->
                     <!--<a href="/student/151250199/assignment" class="course_type">云计算</a>-->
@@ -66,8 +67,8 @@
 </script>
 
 <!--<script type="text/javascript" th:inline="javascript">-->
-    <!--var courseC = [[${courses.get(0).getCtype()}]];-->
-    <!--alert(courseC);-->
+<!--var courseC = [[${courses.get(0).getCtype()}]];-->
+<!--alert(courseC);-->
 <!--</script>-->
 
 </html>

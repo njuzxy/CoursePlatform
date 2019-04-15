@@ -1,3 +1,322 @@
+/********************************************************************************************************************
+
+-----------------------------------------------main.css----------------------------------------------------------------------
+
+***************************************************************************************************************/
+.background {
+    /*width: 1440px;*/
+    /*height: 1080px;*/
+    /*line-height: 50px;*/
+    text-align: center;
+}
+
+.background:before {
+    /*background: url("/image/background.jpg") top center no-repeat;*/
+    background-size: contain;
+    /*使用cover的意思是把背景图片充满整个容器，而不考虑是不是可以看到完整的图片；*/
+    /*使用contain的意思是在容器里完整显示图片，而不考虑容器是否被填满。*/
+    /*width: 1440px;*/
+    height: 1080px;
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /*-1 可以当背景*/
+    -webkit-filter: blur(0px);
+    filter: blur(10px);
+}
+
+.content {
+    margin-right: 200px;
+}
+
+.background-content {
+    /*width: 1440px;*/
+    /*min-height: 1080px;*/
+    /*height: 1080px;*/
+    /*line-height: 50px;*/
+    text-align: center;
+}
+
+/*******************************************************/
+a {
+    color: #00B7FF;
+}
+
+/*body {*/
+/*!*padding-top: 40px;*!*/
+/*!*padding-bottom: 40px;*!*/
+/*background-color: #ffffff;*/
+/*}*/
+
+#h1-welcome {
+    margin-top: 240px;
+    margin-left: 200px;
+    font-size: 50px;
+    color: #2b2b2b;
+}
+
+#btn-choose-signInAndUp {
+    margin-top: 180px;
+    margin-left: 200px;
+
+}
+
+#btn-choose-signInAndUp a {
+    width: 200px;
+}
+
+
+
+
+/********************************************************************************************************************
+
+-----------------------------------------------root.css----------------------------------------------------------------------
+
+***************************************************************************************************************/
+
+
+
+#div-addNewCourse {
+    float: right;
+    margin-right: 110px;
+    margin-top: 15px;
+}
+
+#btn-addNewCourse {
+    /*background-color: transparent;*/
+    border-width: 0px;
+    font-size: 18px;
+}
+
+#btn-addNewCourse:hover {
+    color: #007bff;
+}
+
+/*************************************************************************/
+.card-therter {
+    float: left;
+    /*max-width: 400px;*/
+    /*max-height: 350px;*/
+    padding: 0.75rem;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    border: 0px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #888888;
+    background-color: #ffffff;
+}
+
+.card-therter a {
+    max-height: 35px;
+    max-width: 100px;
+    border-radius: 5px;
+    font-size: 75%;
+}
+
+.card-therter > img {
+    margin-bottom: 0.75rem;
+}
+
+.card-therter p {
+    font-size: 75%;
+    margin: 2px;
+}
+
+/*
+ * Sidebar
+ */
+
+.sidebar {
+    min-width: 200px;
+    /*position: fixed;*/
+    /*top: 56px;*/
+    /*bottom: 0;*/
+    /*left: 0;*/
+    z-index: 1000;
+    /*padding: 30px 0;*/
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    border-right: 1px solid #eee;
+}
+
+/*.sidebar .nav {*/
+/*margin-bottom: 20px;*/
+/*}*/
+
+/*.sidebar .nav-item {*/
+/*width: 100%;*/
+/*}*/
+
+.sidebar .nav-item + .nav-item {
+    margin-left: 0;
+}
+
+.sidebar .nav-link {
+    border-radius: 0;
+}
+
+/*******************************/
+
+.div-therter {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    min-height: 1400px;
+}
+
+.div-chooseTabTherter {
+    padding-top: 3rem;
+    /*padding-bottom: 3rem;*/
+    max-width: 200px;
+    margin-left: -100px;
+    position: absolute;
+
+}
+
+.div-contentRight {
+    border: 1px solid #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px #888888;
+    background-color: #ffffff;
+    margin-top: 3rem;
+    margin-left: 105px;
+    min-height: 500px;
+    width: 1100px;
+    min-height: 800px;
+    position: absolute;
+
+}
+
+/*
+table
+ */
+#table-publish-assignment {
+    background: transparent;
+    border-width: 0;
+    /*margin-top: 30px;*/
+    margin-left: 200px;
+    /*width: 490px;*/
+    /*padding-left: 10px;*/
+}
+
+#table-publish-assignment td {
+    font-size: 20px;
+    /*margin: 5px;*/
+    color: black;
+}
+
+#table-publish-assignment tr td:nth-child(1) {
+    text-align: right;
+}
+
+#table-publish-assignment input,
+#table-publish-assignment select,
+#table-publish-assignment textarea {
+    width: 397px;
+}
+
+#select-lateTime, #select-latePercent {
+    max-width: 190px;
+}
+
+
+/*button*/
+#btn-publishShow {
+    width: 120px;
+    /*float: right;*/
+    margin: 40px 700px auto;
+}
+
+/*search form*/
+#div-formSearch {
+    margin-top: 30px;
+}
+
+#form-searchOrderId {
+    margin-left: 330px;
+}
+
+#input-searchOrderId {
+    width: 300px;
+}
+
+table td, table th {
+    text-align: center;
+}
+
+.table-striped th, .table-striped td {
+    font-size: 14px;
+}
+
+/*************************************************************************/
+
+.td-assignmentLeft {
+    min-width: 200px;
+}
+
+#select-lateTime {
+    width: 190px;
+    float: left;
+}
+
+#select-courseType {
+    width: 190px;
+    float: right;
+}
+
+#btn-confirmPublish, #btn-addSubmit {
+    margin-left: 825px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/*figure assignment*/
+#div-figureAssignment {
+    margin-left: 100px;
+}
+
+#btn-addFigure {
+    margin-left: 935px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/*manage user*/
+#div-manageUser {
+    margin-left: 10rem;
+}
+
+.h5-addUser {
+    margin-left: -48rem;
+}
+
+.td-addUser, .td-addUser3 {
+    min-width: 150px;
+}
+
+.td-addUser2 {
+    min-width: 300px;
+}
+
+#input-addSingleSid, #btn-userFile {
+    min-width: 300px;
+    max-width: 300px;
+}
+
+#select-courseTypeFigure {
+    width: 200px;
+}
+
+
+
+/********************************************************************************************************************
+
+-----------------------------------------------style.css----------------------------------------------------------------------
+
+***************************************************************************************************************/
+
+
+
 /*body {*/
 /*padding: 100px;*/
 /*margin-bottom: 100px;*/
@@ -209,4 +528,160 @@ footer p {
     text-align: left;
     margin-left: 100px;
     margin-bottom: 20px;
+}
+
+
+
+
+
+
+/********************************************************************************************************************
+
+-----------------------------------------------homepage.css----------------------------------------------------------------------
+
+***************************************************************************************************************/
+
+
+
+
+
+
+body {
+    background-color: #ffffff;
+}
+
+.navbar {
+    margin-bottom: 0;
+}
+
+.jumbotron {
+    /*padding-top: 6rem;*/
+    /*padding-bottom: 6rem;*/
+    padding: 0;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    background-color: #ffffff;
+}
+
+.jumbotron p:last-child {
+    margin-bottom: 0;
+}
+
+.jumbotron-heading {
+    font-weight: 300;
+}
+
+.jumbotron .container {
+    max-width: 40rem;
+}
+
+
+
+.album {
+    min-height: 50rem; /* Can be removed; just added for demo purposes */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#btn-chooseTab a {
+    min-width: 150px;
+    border-radius: 10px;
+}
+
+/**************************card**************************/
+.card {
+    /*max-width: 300px;*/
+    min-width: 200px;
+    min-height: 60px;
+    padding: 0.75rem;
+    margin-left: 3rem;
+    margin-bottom: 1rem;
+    border: 0px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px #888888;
+    background-color: #ffffff;
+}
+
+.card a {
+    border-radius: 5px;
+    font-size: 20px;
+    color: #2b2b2b;
+}
+
+.div-img {
+    max-width: 180px;
+    position: absolute;
+    /*float: left;*/
+}
+
+.div-table {
+    max-width: 200px;
+    position: absolute;
+    top: 20px;
+    left: 200px;
+}
+
+/***************************跑马灯*******************************/
+.carousel {
+    max-width: 600px;
+    min-width: 600px;
+    margin: 50px auto 50px;
+}
+
+.w-100 {
+    max-width: 600px;
+    max-height: 400px;
+}
+
+/*********************showHomepage**************************/
+
+.card-name {
+    font-size: 21px;
+    color: #0069d9;
+}
+
+.span-price {
+    font-size: 20px;
+    color: #cc5500;
+}
+
+.container-card {
+    text-align: center;
+    /*margin-left: 250px;*/
+    margin-top: 20px;
+}
+
+.div-chooseTab {
+    position: fixed;
+    top: 56px;
+    left: 0px;
+    z-index: 99;
+
+}
+.div-left{
+    float: left;
+}
+.div-right{
+    float: right;
+}
+
+
+.mainContent{
+    margin-top: 60px;
+    min-height: 400px;
+}
+
+.nav-item{
+    width: 250px;
+}
+
+.nav-pills .nav-link {
+    border-radius: 0px;
+}
+.nav-link{
+    border-radius: 0px;
+    padding: 1.0rem 1rem;
+}
+.sidebar{
+    height: 900px;
 }

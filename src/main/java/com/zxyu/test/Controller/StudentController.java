@@ -4,6 +4,7 @@ import ch.ethz.ssh2.Session;
 import com.zxyu.test.Dao.UserDao;
 import com.zxyu.test.Entity.*;
 import com.zxyu.test.Helper.AssistTool;
+import com.zxyu.test.Helper.StateEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.stereotype.Controller;
@@ -13,9 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.PrintWriter;
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.util.*;
+
+import static com.zxyu.test.Helper.AssistTool.innerUrl;
 
 @Controller
 @EnableAutoConfiguration
@@ -80,7 +83,8 @@ public class StudentController {
             submitState = "Scored";
             score = "run : " + submit.getRun_score() + "  /  quality : " + submit.getQuality_score();
         }
-        System.out.println(submitState+"         "+score);
+        System.out.println(submitState + "         " + score);
+        mv.addObject("sid", sid);
         mv.addObject("assignment", assignment);
         mv.addObject("submitState", submitState);
         mv.addObject("score", score);
@@ -89,17 +93,19 @@ public class StudentController {
 
     @RequestMapping(value = "/{sid}/record", method = RequestMethod.GET)
     public ModelAndView getRecord(@PathVariable String sid) {
-//        List<SubmitEntity> submits=userDao.findSubmitBySid(sid);
+        List<SubmitEntity> submits = userDao.findSubmitsBySid(sid);
         ModelAndView mv = new ModelAndView("/student/s-record");
-//        mv.addObject("records",submits);
+        mv.addObject("sid", sid);
+        mv.addObject("records", submits);
         return mv;
     }
 
     @RequestMapping(value = "/{sid}/notice", method = RequestMethod.GET)
     public ModelAndView getNotice(@PathVariable String sid) {
-//        List<NoticeEntity> notices=userDao.findNoticeBySid(sid);
+        List<NoticeEntity> notices = userDao.findNoticesBySid(sid);
         ModelAndView mv = new ModelAndView("/student/s-notice");
-//        mv.addObject("notices",notices);
+        mv.addObject("sid", sid);
+        mv.addObject("notices", notices);
         return mv;
     }
 
@@ -115,33 +121,30 @@ public class StudentController {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         PrintWriter out = null;
 
-        System.out.println("---------------------------------fileType : " + fileType);
+        HttpSession session = request.getSession();
+        String courseType = String.valueOf(session.getAttribute("ctype"));
+        int aid = Integer.parseInt(String.valueOf(session.getAttribute("aid")));
+        String sid = String.valueOf(session.getAttribute("sid"));
+        //test
+        System.out.println(sid);
 
-        String courseType = "Cloud";
-        String title = "assignment01";
-        String sid = "151250199";
-
-        String assignmentUrl = "/src/main/java/com/zxyu/test/jars/course/" + courseType + "/" + title + "/";
-        String txtUrl;
-        String submitUrl = assignmentUrl + "submit/" + sid;
-        String txtFileNameS = courseType + "_" + title + "_txt_" + sid + ".txt";
+        String assignmentUrl = innerUrl + courseType + "/" + aid + "/";
+        String txtUrl = assignmentUrl + "txt/";
+        String submitUrl = assignmentUrl + "submit/";
+        String txtFileNameS = sid + ".txt";
         String submitFileNameS = "";
 
         if (fileType.equals("python")) {
-            txtUrl = assignmentUrl + "txt/python/" + sid;
-            submitFileNameS = courseType + "_" + title + "_submit_" + sid + ".py";
+            txtUrl += "python/";
+            submitFileNameS = sid + ".py";
         } else if (fileType.equals("java")) {
-            txtUrl = assignmentUrl + "txt/java/" + sid;
-            submitFileNameS = courseType + "_" + title + "_submit_" + sid + ".jar";
-
-        } else {
-            txtUrl = assignmentUrl + "txt/scala/" + sid;
-            submitFileNameS = courseType + "_" + title + "_submit_" + sid + ".jar";
-
+            txtUrl += "java/";
+            submitFileNameS = sid + ".jar";
         }
         boolean submitResult1 = assistTool.saveFile(txtUrl, txtFile, txtFileNameS);
         boolean submitResult2 = assistTool.saveFile(submitUrl, submitFile, submitFileNameS);
 
+        //submit失败提醒
         if (!submitResult1 || !submitResult2) {
             //alert提醒
             try {
@@ -157,23 +160,57 @@ public class StudentController {
         String submitFileUrl = submitUrl + "/" + submitFileNameS;
         Date date = new Date();
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SubmitEntity submit = new SubmitEntity("151250199", 0, fileType, "submitted", submitFileUrl, "", "", "", "", date);
-        if(userDao.findSubmit(sid,0)==null){
-        userDao.addSubmit(submit);
-        }else{
+
+        /*
+        submit多了type属性
+         */
+        SubmitEntity submit = new SubmitEntity(sid, aid, fileType, assistTool.enum2Str(StateEnum.Submitted), submitFileUrl, txtFileUrl, assistTool.enum2Str(StateEnum.NotSubmitted), "0", "0", date);
+        if (userDao.findSubmit(sid, aid) == null) {
+            userDao.addSubmit(submit);
+        } else {
             userDao.updateSubmit(submit);
         }
         System.out.println("---------------------------------submit");
 
         try {
             out = response.getWriter();
-            out.print("<script> window.location.href='/student/151250199/assignment';</script>");
+            out.print("<script> window.location.href='/student/" + aid + "/assignment';</script>");
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-//        return "redirect:/student/151250199/assignment";
+    }
+
+    @RequestMapping("/downloadDetailFile")
+    public void downloadDetailFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        String fileName = "2DZ1832004.py";
+        String path = "/Users/apple/Documents/GitHub/CoursePlatform/src/main/java/com/zxyu/test/jars";
+//   String path = request.getSession().getServletContext().getRealPath("/");
+        //文件在项目的webapp 下面
+//   String fileName="guest_template.xls";   ///sstf-manager/src/main/webapp/guest_template.xls
+        //设置响应头和客户端保存文件名
+        response.setCharacterEncoding("utf-8");
+        response.setContentType("multipart/form-data");
+        response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+        InputStream inputStream = null;
+        try {
+            //打开本地文件流
+            inputStream = new FileInputStream(path + fileName);
+            //激活下载操作
+            OutputStream os = response.getOutputStream();
+            //循环写入输出流
+            byte[] b = new byte[2048];
+            int length;
+            while ((length = inputStream.read(b)) > 0) {
+                os.write(b, 0, length);
+            }
+            os.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (inputStream != null) inputStream.close();
+        }
     }
 
 }
