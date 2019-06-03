@@ -305,7 +305,9 @@ public class RootController {
             assistTool.updateScore(py_scores,aidNow,StateEnum.Quality);
 
             //duplicate test
-            DupHelper dupHelper = new DupHelper(aidNow);
+            String dup_dirNow = tempUrl + innerUrl + "/"+assignment.getCtype()+"/";
+            //？？？俩dir是干啥的
+            DupHelper dupHelper = new DupHelper(dup_dirNow,dup_dirNow,aidNow);
             dupHelper.cal();
             dupHelper.getAllSimiarity();
             List<DuplicateEntity> duplicates=dupHelper.getResult();
