@@ -40,11 +40,11 @@ public class DupHelper {
         this.result = result;
     }
 
-    public static String getOutPutparentPath() {
+    public  String getOutPutparentPath() {
         return OutPutparentPath;
     }
 
-    public static String getInPutparentPath() {
+    public  String getInPutparentPath() {
         return InPutparentPath;
     }
 
@@ -161,10 +161,10 @@ public class DupHelper {
     }
 
     public static void main(String args[]){
-        DupHelper helper=new DupHelper(1);
+       /* DupHelper helper=new DupHelper(1);
        helper.cal();
        helper.getAllSimiarity();
-       System.out.println(helper.getResult().size());
+       System.out.println(helper.getResult().size());*/
     }
 
 
