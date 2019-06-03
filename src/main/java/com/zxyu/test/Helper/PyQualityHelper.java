@@ -14,7 +14,7 @@ public class PyQualityHelper {
         list = new ArrayList<>();
     }
 
-    private void calPyQuality() {
+    public void calPyQuality() {
         File file = new File(dir);
         File outDir = file.getParentFile().listFiles()[2];
         //int aid=file.getParentFile();

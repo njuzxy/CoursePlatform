@@ -16,7 +16,7 @@ public class JavaQualityHelper {
         list=new ArrayList<>();
     }
 
-    private void calJavaQuality(){
+    public void calJavaQuality(){
         File file=new File(dir);
         File outDir=file.getParentFile().listFiles()[2];
         //int aid=file.getParentFile();

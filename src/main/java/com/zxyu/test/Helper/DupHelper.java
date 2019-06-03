@@ -14,10 +14,8 @@ public class DupHelper {
     private static final String InPutparentPath="i:\\src_text\\";
     private String pyInPut;
     private String javaInput;
-    private String scalInput;
     private String pyOutPut;
     private String javaOutPut;
-    private String scalaOutPut;
     private List<DuplicateEntity> result;
 
 
@@ -27,10 +25,8 @@ public class DupHelper {
         this.aid=aid;
         this.pyInPut=InPutparentPath+aid+"\\python";
         this.javaInput=InPutparentPath+aid+"\\java";
-        this.scalInput=InPutparentPath+aid+"\\scala";
         this.pyOutPut=OutPutparentPath+aid+"\\python_"+aid+".txt";
         this.javaOutPut=OutPutparentPath+aid+"\\java_"+aid+".txt";
-        this.scalaOutPut=OutPutparentPath+aid+"\\scala_"+aid+".txt";
         result=new ArrayList();
     }
 
@@ -66,13 +62,6 @@ public class DupHelper {
         this.javaInput = javaInput;
     }
 
-    public String getScalInput() {
-        return scalInput;
-    }
-
-    public void setScalInput(String scalInput) {
-        this.scalInput = scalInput;
-    }
 
     public String getPyOutPut() {
         return pyOutPut;
@@ -90,13 +79,7 @@ public class DupHelper {
         this.javaOutPut = javaOutPut;
     }
 
-    public String getScalaOutPut() {
-        return scalaOutPut;
-    }
 
-    public void setScalaOutPut(String scalaOutPut) {
-        this.scalaOutPut = scalaOutPut;
-    }
 
 
     public int getAid() {
@@ -125,7 +108,6 @@ public class DupHelper {
     public void cal(){
          calSimilarity(pyOutPut,pyInPut);
          calSimilarity(javaOutPut,javaInput);
-         calSimilarity(scalaOutPut,scalInput);
     }
 
 
@@ -174,7 +156,6 @@ public class DupHelper {
     public void getAllSimiarity(){
          getSimilarity(pyInPut,pyOutPut);
          getSimilarity(javaInput,javaOutPut);
-         getSimilarity(scalInput,scalaOutPut);
     }
 
     public static void main(String args[]){
