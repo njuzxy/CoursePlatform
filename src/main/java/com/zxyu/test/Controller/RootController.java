@@ -48,7 +48,7 @@ public class RootController {
     public ModelAndView getAssignment(@PathVariable String ctype) {
         List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
         if (assignments.size() > 0) {
-            System.out.println("------------" + assignments.get(0).getTitle());
+//            System.out.println("------------" + assignments.get(0).getTitle());
         }
         ModelAndView mv = new ModelAndView("/root/r-assignment");
         mv.addObject("sid", "root");
@@ -64,7 +64,7 @@ public class RootController {
         mv.addObject("sid", "root");
         AssignmentEntity assignment = userDao.findAssignment(aidInt);
         List<SubmitEntity> submits=userDao.findAllSubmit(aidInt);
-        System.out.println("TEST------------------submits.get[0] : "+submits.get(0).getSid()+" "+submits.get(0).getRun_score());
+//        System.out.println("TEST------------------submits.get[0] : "+submits.get(0).getSid()+" "+submits.get(0).getRun_score());
 
 //        List<DuplicateEntity> duplicates = userDao.findDuplicate(aidInt);
 
@@ -101,11 +101,11 @@ public class RootController {
         List<CourseEntity> courses = userDao.findAllCourse();
         List<AssignmentEntity> assignments = new ArrayList<>();
         if (ctype == null) {
-            System.out.println("ctype now is : " + ctype);
+//            System.out.println("ctype now is : " + ctype);
             ctype = courses.get(0).getCtype();
             assignments = userDao.findAllAssignment(ctype);
         } else {
-            System.out.println("ctype now is : " + ctype);
+//            System.out.println("ctype now is : " + ctype);
             assignments = userDao.findAllAssignment(ctype);
         }
         List<AssignmentEntity> assignmentsPublished = new ArrayList<>();
@@ -269,7 +269,7 @@ public class RootController {
         int[] figureAids = new int[figureAidsStr.length];
         for (int i = 0; i < figureAidsStr.length; i++) {
             figureAids[i] = Integer.parseInt(figureAidsStr[i]);
-            System.out.println("figureAids[" + i + "] = " + figureAids[i]);
+//            System.out.println("figureAids[" + i + "] = " + figureAids[i]);
         }
         for (int i = 0; i < figureAids.length; i++) {
             int aidNow = figureAids[i];

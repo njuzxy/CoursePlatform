@@ -41,7 +41,7 @@ public class StudentController {
 //            course.put("ctype", c.getCtype());
 //            coursesList.add(course);
 //        }
-        System.out.println("course[0] = " + courses.get(0).getCtype());
+//        System.out.println("course[0] = " + courses.get(0).getCtype());
 
         ModelAndView mv = new ModelAndView("/student/s-course");
         mv.addObject("student", student);
@@ -53,7 +53,7 @@ public class StudentController {
     @RequestMapping(value = "/{sid}/{ctype}/assignment", method = RequestMethod.GET)
     public ModelAndView getAssignment(@PathVariable String sid, @PathVariable String ctype, HttpServletRequest request) {
         List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
-        System.out.println("------------" + assignments.get(0).getTitle());
+//        System.out.println("------------" + assignments.get(0).getTitle());
         ModelAndView mv = new ModelAndView("/student/s-assignment");
 
         HttpSession session = request.getSession();
@@ -77,7 +77,7 @@ public class StudentController {
         HttpSession session = request.getSession();
         session.setAttribute("aid", aid);
         session.setAttribute("ctype", ctype);
-        System.out.println("TEST----------------------session.aid : " + session.getAttribute("aid"));
+//        System.out.println("TEST----------------------session.aid : " + session.getAttribute("aid"));
 
 
         String submitState = "";
@@ -104,7 +104,7 @@ public class StudentController {
             ifCanSubmit=true;
         }
 
-        System.out.println(submitState + "         " + score);
+//        System.out.println(submitState + "         " + score);
         mv.addObject("sid", sid);
         mv.addObject("assignment", assignment);
         mv.addObject("submitState", submitState);
@@ -148,7 +148,7 @@ public class StudentController {
         int aid = Integer.parseInt(String.valueOf(session.getAttribute("aid")));
         String sid = String.valueOf(session.getAttribute("sid"));
         //test
-        System.out.println(sid);
+//        System.out.println(sid);
 
         String assignmentUrl = innerUrl + courseType + "/" + aid + "/";
         String txtUrl = assignmentUrl + "txt/";
