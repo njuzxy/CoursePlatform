@@ -10,8 +10,8 @@ import java.util.List;
 public class DupHelper {
 
     private int aid;
-    private static final String OutPutparentPath="i:\\dup\\";
-    private static final String InPutparentPath="i:\\src_text\\";
+    private  String OutPutparentPath="i:\\dup\\";
+    private  String InPutparentPath="i:\\src_text\\";
     private String pyInPut;
     private String javaInput;
     private String pyOutPut;
@@ -21,7 +21,9 @@ public class DupHelper {
 
 
 
-     public DupHelper(int aid){
+     public DupHelper(String OutPutParentPath,String InputParentPath,int aid){
+         this.OutPutparentPath=OutPutParentPath;
+         this.InPutparentPath=InputParentPath;
         this.aid=aid;
         this.pyInPut=InPutparentPath+aid+"\\python";
         this.javaInput=InPutparentPath+aid+"\\java";
