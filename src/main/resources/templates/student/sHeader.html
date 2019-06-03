@@ -28,7 +28,7 @@
                 <span class="navbar-brand" id="span-web">Course Platform</span>
                 <div id="logo"><a href="/"><img src="/image/favicon.ico" alt="logo" width="40"></a></div>
                 <span class="navbar-brand" id="a-course">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                <span class="navbar-brand" id="presentCourse">Present course : Statistics</span>
+                <span class="navbar-brand" id="presentCourse" th:text="'Present course : '+${session.ctype}">Present course : Statistics</span>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarHeader"
                         aria-controls="navbarHeader"

@@ -21,12 +21,12 @@ public class SubmitEntity implements Serializable {
     private String file;
     private String text_file;
     private String type;
-    private String run_score;
-    private String quality_score;
+    private double run_score;
+    private double quality_score;
     private Date time;
 
 
-    public SubmitEntity(String sid, int aid, String language, String state, String file,String text_file, String type, String run_score, String quality_score, Date time) {
+    public SubmitEntity(String sid, int aid, String language, String state, String file,String text_file, String type, double run_score, double quality_score, Date time) {
         this.sid = sid;
         this.aid = aid;
         this.language = language;
@@ -103,19 +103,19 @@ public class SubmitEntity implements Serializable {
         this.type = type;
     }
 
-    public String getRun_score() {
+    public double getRun_score() {
         return run_score;
     }
 
-    public void setRun_score(String run_score) {
+    public void setRun_score(double run_score) {
         this.run_score = run_score;
     }
 
-    public String getQuality_score() {
+    public double getQuality_score() {
         return quality_score;
     }
 
-    public void setQuality_score(String quality_score) {
+    public void setQuality_score(double quality_score) {
         this.quality_score = quality_score;
     }
 }

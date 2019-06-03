@@ -3,6 +3,7 @@ package com.zxyu.test.Controller;
 import com.zxyu.test.Dao.UserDao;
 import com.zxyu.test.DaoImpl.UserDaoImpl;
 import com.zxyu.test.Entity.UserEntity;
+import com.zxyu.test.Helper.AssistTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
@@ -27,6 +28,8 @@ public class MainController {
 
     @Autowired
     private UserDao userDao;
+
+    private AssistTool assistTool = new AssistTool();
 
     @RequestMapping("/")
     public ModelAndView getIndex(ModelAndView mv) {
@@ -62,10 +65,25 @@ public class MainController {
         response.setHeader("Content-type", "text/html;charset=UTF-8");
         PrintWriter out = null;
 
-        if (sid.equals("root") && pwd.equals("root")) {
-            HttpSession session = request.getSession();
-            session.setAttribute("sid", sid);
-            return "redirect:/root/course";
+        //每次登录前检查作业状态是否已截止
+        assistTool.updateAssignmentState();
+
+        if (sid.equals("root")) {
+            if(pwd.equals("root")){
+                HttpSession session = request.getSession();
+                session.setAttribute("sid", sid);
+                return "redirect:/root/course";
+            }else{
+                //alert提醒
+                try {
+                    out = response.getWriter();
+                    out.print("<script>alert('Root Password wrong! ');" +
+                            "window.location.href='/login';</script>");
+                    out.flush();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         } else {
             if (user == null) {
                 //alert提醒

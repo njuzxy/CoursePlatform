@@ -1,24 +1,48 @@
 package com.zxyu.test.Helper;
 
+import com.zxyu.test.Dao.FileDao;
 import com.zxyu.test.Dao.UserDao;
+import com.zxyu.test.Entity.AssignmentEntity;
+import com.zxyu.test.Entity.CourseEntity;
+import com.zxyu.test.Entity.DuplicateEntity;
 import com.zxyu.test.Entity.SubmitEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class AssistTool {
     public static String tempUrl = System.getProperty("user.dir");//当前用户系统目录
     public static String innerUrl = "/src/main/java/com/zxyu/test/jars/";//当前项目固定存文件目录
+
+//    private UserDao userDao=new UserDaoImpl();
+//    private FileDao fileDao=new FileDaoImpl();
+
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private FileDao fileDao;
+
+    //解决Autowired注入不了的问题
+    public static AssistTool testUtils;
+    @PostConstruct
+    public void init() {
+        testUtils = this;
+    }
+
 
     public boolean saveFile(String url, MultipartFile file, String fileName) {
         if (file.isEmpty()) {
@@ -95,20 +119,63 @@ public class AssistTool {
         return String.valueOf(state);
     }
 
-    public void updateScore(List<Object[]> scores, int aidNow,StateEnum scoreType) {
+    public void updateScore(List<Object[]> scores, int aidNow, StateEnum scoreType) {
 
         for (int j = 0; j < scores.size(); j++) {
             String sidNow = String.valueOf(scores.get(j)[1]);
-            String scoreNow = String.valueOf(scores.get(j)[2]);
-            SubmitEntity submitNow = userDao.findSubmit(sidNow, aidNow);
+            double scoreNow = Double.parseDouble(String.valueOf(scores.get(j)[2]));
+            SubmitEntity submitNow = testUtils.userDao.findSubmit(sidNow, aidNow);
             //什么时候算scored？质量分要不要考虑
             submitNow.setState(enum2Str(StateEnum.Scored));
-            if(scoreType.equals(StateEnum.Run)){
-            submitNow.setRun_score(scoreNow);
-            }else if(scoreType.equals(StateEnum.Quality)){
+            if (scoreType.equals(StateEnum.Run)) {
+                submitNow.setRun_score(scoreNow);
+            } else if (scoreType.equals(StateEnum.Quality)) {
                 submitNow.setQuality_score(scoreNow);
             }
-            userDao.updateSubmit(submitNow);
+            testUtils.userDao.updateSubmit(submitNow);
         }
+    }
+
+    public void addDuplicates(List<DuplicateEntity> duplicates) {
+        for (int i = 0; i < duplicates.size(); i++) {
+            testUtils.fileDao.addDuplicate(duplicates.get(i));
+        }
+    }
+
+    public void updateAssignmentState() {
+        List<CourseEntity> courses = testUtils.userDao.findAllCourse();
+        for (int i = 0; i < courses.size(); i++) {
+            String ctype = courses.get(i).getCtype();
+            List<AssignmentEntity> assignments = testUtils.userDao.findAllAssignment(ctype);
+            for (int j = 0; j < assignments.size(); j++) {
+                AssignmentEntity aBefore=assignments.get(j);
+                String assignmentDDL = aBefore.getDeadline();
+
+                if(aBefore.getState().equals(enum2Str(StateEnum.Published))){//判断作业类型为published
+                    boolean result=dateIfChange(assignmentDDL);
+                    if(result){
+                        aBefore.setState(enum2Str(StateEnum.End));
+                        testUtils.userDao.updateAssignment(aBefore);
+                    }
+                }
+            }
+        }
+    }
+
+    public boolean dateIfChange(String assignmentDDL)  {
+        String[] splitDDL = assignmentDDL.split(";");//分割DDL
+        String ddlStr=splitDDL[0];
+        Date now = new Date();
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date date = null;
+        try {
+            date = df.parse(ddlStr);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        if (date.getTime() <= now.getTime()) {//作业已过期，需要改变作业状态
+            return true;
+        }
+        return false;
     }
 }

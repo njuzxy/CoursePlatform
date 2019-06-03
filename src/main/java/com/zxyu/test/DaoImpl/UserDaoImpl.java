@@ -169,4 +169,12 @@ public class UserDaoImpl implements UserDao {
         List<NoticeEntity>result=mongoTemplate.find(query,NoticeEntity.class,"notice");
         return result;
     }
+
+    @Override
+    public List<DuplicateEntity> findDuplicate(int aid){
+        Query query=new Query(Criteria.where("aid").is(aid));
+        List<DuplicateEntity>result=mongoTemplate.find(query,DuplicateEntity.class,"duplicate");
+        return result;
+    }
+
 }

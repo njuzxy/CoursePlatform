@@ -47,4 +47,5 @@ public interface UserDao {
 
      List<NoticeEntity> findNoticesBySid(String sid);
 
+     List<DuplicateEntity> findDuplicate(int aid);
 }

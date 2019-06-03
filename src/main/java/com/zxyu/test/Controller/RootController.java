@@ -63,9 +63,14 @@ public class RootController {
         ModelAndView mv = new ModelAndView("/root/r-assignmentInfo");
         mv.addObject("sid", "root");
         AssignmentEntity assignment = userDao.findAssignment(aidInt);
+        List<SubmitEntity> submits=userDao.findAllSubmit(aidInt);
+        System.out.println("TEST------------------submits.get[0] : "+submits.get(0).getSid()+" "+submits.get(0).getRun_score());
 
+//        List<DuplicateEntity> duplicates = userDao.findDuplicate(aidInt);
 
         mv.addObject("assignment", assignment);
+        mv.addObject("submits", submits);
+//        mv.addObject("duplicates", duplicates);
 
         return mv;
     }
@@ -247,7 +252,8 @@ public class RootController {
 
         try {
             out = response.getWriter();
-            out.print("<script> window.location.href='/root/course';</script>");
+            out.print("<script>alert('Add new assignment success!');" +
+                    "window.location.href='/root/course';</script>");
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -289,6 +295,13 @@ public class RootController {
             PyQualityHelper pyQualityHelper = new PyQualityHelper(py_dirNow);
             List<Object[]> py_scores=pyQualityHelper.getList();
             assistTool.updateScore(py_scores,aidNow,StateEnum.Quality);
+
+            //duplicate test
+            DupHelper dupHelper = new DupHelper(aidNow);
+            dupHelper.cal();
+            dupHelper.getAllSimiarity();
+            List<DuplicateEntity> duplicates=dupHelper.getResult();
+            assistTool.addDuplicates(duplicates);
 
             //更新作业状态为scored
             assignment.setState(assistTool.enum2Str(StateEnum.Scored));

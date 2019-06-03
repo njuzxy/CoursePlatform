@@ -85,8 +85,8 @@
                     <div>
                         <hr/>
                         <div style="margin-top: 20px;margin-bottom: 20px;color: black;font-size: 20px">
-                       All score :
-                   </div>
+                            All score :
+                        </div>
                         <table class="table table-striped" id="table-allScoreInfo">
                             <thead>
                             <tr>
@@ -99,7 +99,7 @@
                             </tr>
                             </thead>
                             <tbody id="tbody-allScoreInfo">
-
+<!--
                             <tr>
                                 <td>151250199</td>
                                 <td>Submitted</td>
@@ -122,23 +122,24 @@
                                     <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
                                 </td>
                                 <td>
-                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="" disabled="disabled">
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick=""
+                                           disabled="disabled">
                                 </td>
-
                             </tr>
-                            <!--<tr th:each="s: ${submits}">-->
-                            <!--<td th:text="${s.sid}"></td>-->
-                            <!--<td th:text="${s.state}"></td>-->
-                            <!--<td th:text="${s.run_score}"></td>-->
-                            <!--<td th:text="${a.quality_score}"></td>-->
-                            <!--<td>-->
-                            <!--<input type="button">-->
-                            <!--</td>-->
-                            <!--<td>-->
-                            <!--<input type="button">-->
-                            <!--</td>-->
+-->
+                            <tr th:each="s: ${submits}">
+                                <td th:text="${s.sid}"></td>
+                                <td th:text="${s.state}"></td>
+                                <td th:text="${s.run_score}"></td>
+                                <td th:text="${s.quality_score}"></td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                            </tr>
 
-                            <!--</tr>-->
                             </tbody>
                         </table>
 
@@ -162,7 +163,7 @@
                             </tr>
                             </thead>
                             <tbody id="tbody-duplicateDetail">
-
+<!--
                             <tr>
                                 <td>151250199</td>
                                 <td>151250198</td>
@@ -197,20 +198,20 @@
                                 <td>
                                     <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
                                 </td>
-
                             </tr>
-                            <!--<tr th:each="d: ${duplicates}">-->
-                            <!--<td th:text="${d.sid}"></td>-->
-                            <!--<td th:text="${d.similar_sid}"></td>-->
-                            <!--<td th:text="${d.s_percent}"></td>-->
-                            <!--<td>-->
-                            <!--<input type="button">-->
-                            <!--</td>-->
-                            <!--<td>-->
-                            <!--<input type="button">-->
-                            <!--</td>-->
+-->
+                            <tr th:each="d: ${duplicates}">
+                                <td th:text="${d.sid}"></td>
+                                <td th:text="${d.similar_sid}"></td>
+                                <td th:text="${d.s_percent}"></td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                                <td>
+                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                </td>
+                            </tr>
 
-                            <!--</tr>-->
                             </tbody>
                         </table>
 

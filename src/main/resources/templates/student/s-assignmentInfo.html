@@ -24,7 +24,7 @@
         <div class="album text-muted" id="div-hot">
 
             <hr/>
-            <h3 id="h3-therterTabTitle">Assignment 01</h3>
+            <h3 id="h3-therterTabTitle" th:text="${assignment.getTitle()}">Assignment 01</h3>
             <hr/>
             <div id="div-assignmentInfo">
                 <table id="table-assignmentInfo" cellpadding="15" cellspacing="10" rules="none">
@@ -94,7 +94,7 @@
 
                 <a id="modal-modifyPwd" href="#modal-container-modifyPwd" role="button"
                    class="btn btn-primary"
-                   data-toggle="modal">Submit.</a>
+                   data-toggle="modal" th:if="${ifCanSubmit}">Submit.</a>
                 <form class="form-class" id="form-publishShow" method="post"
                       enctype="multipart/form-data" action="/student/submitAssignment">
                     <div class="modal fade" id="modal-container-modifyPwd" role="dialog"
@@ -122,7 +122,6 @@
                                                     <select id="select-fileType" name="fileType" value="">
                                                         <option value="java">java</option>
                                                         <option value="python">python</option>
-                                                        <option value="scala">jar</option>
                                                     </select>
                                                 </td>
                                             </tr>

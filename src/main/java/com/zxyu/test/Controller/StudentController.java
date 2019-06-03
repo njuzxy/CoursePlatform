@@ -51,10 +51,16 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/{sid}/{ctype}/assignment", method = RequestMethod.GET)
-    public ModelAndView getAssignment(@PathVariable String sid, @PathVariable String ctype) {
+    public ModelAndView getAssignment(@PathVariable String sid, @PathVariable String ctype, HttpServletRequest request) {
         List<AssignmentEntity> assignments = userDao.findAllAssignment(ctype);
         System.out.println("------------" + assignments.get(0).getTitle());
         ModelAndView mv = new ModelAndView("/student/s-assignment");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("ctype", ctype);
+        System.out.println("TEST----------------------session.ctype : " + session.getAttribute("ctype"));
+
+
         mv.addObject("sid", sid);
         mv.addObject("ctype", ctype);
         mv.addObject("assignments", assignments);
@@ -62,32 +68,48 @@ public class StudentController {
     }
 
     @RequestMapping(value = "/{sid}/{ctype}/{aid}/assignmentInfo", method = RequestMethod.GET)
-    public ModelAndView getAssignmentInfo(@PathVariable String sid, @PathVariable String ctype, @PathVariable String aid) {
+    public ModelAndView getAssignmentInfo(@PathVariable String sid, @PathVariable String ctype, @PathVariable String aid, HttpServletRequest request) {
         int aidInt = Integer.parseInt(aid);
         ModelAndView mv = new ModelAndView("/student/s-assignmentInfo");
         AssignmentEntity assignment = userDao.findAssignment(aidInt);
         SubmitEntity submit = userDao.findSubmit(sid, aidInt);
+
+        HttpSession session = request.getSession();
+        session.setAttribute("aid", aid);
+        session.setAttribute("ctype", ctype);
+        System.out.println("TEST----------------------session.aid : " + session.getAttribute("aid"));
+
 
         String submitState = "";
         String score = "";
         if (submit == null) {
             submitState = "Not submitted";
             score = "Not available";
-        } else if (submit.getState().equals("not_submitted")) {
+        } else if (submit.getState().equals(assistTool.enum2Str(StateEnum.NotSubmitted))) {
             submitState = "Not submitted";
             score = "Not available";
-        } else if (submit.getState().equals("submitted")) {
+        } else if (submit.getState().equals(assistTool.enum2Str(StateEnum.Submitted))) {
             submitState = "Submitted";
             score = "Waiting";
-        } else if (submit.getState().equals("scored")) {
+        } else if (submit.getState().equals(assistTool.enum2Str(StateEnum.Scored))) {
             submitState = "Scored";
             score = "run : " + submit.getRun_score() + "  /  quality : " + submit.getQuality_score();
+        } else{
+            submitState = "Scoring";
+            score = "Waiting";
         }
+
+        boolean ifCanSubmit = false;
+        if(assignment.getState().equals(assistTool.enum2Str(StateEnum.Published))){
+            ifCanSubmit=true;
+        }
+
         System.out.println(submitState + "         " + score);
         mv.addObject("sid", sid);
         mv.addObject("assignment", assignment);
         mv.addObject("submitState", submitState);
         mv.addObject("score", score);
+        mv.addObject("ifCanSubmit", ifCanSubmit);
         return mv;
     }
 
@@ -156,15 +178,15 @@ public class StudentController {
                 e.printStackTrace();
             }
         }
-        String txtFileUrl = txtUrl + "/" + txtFileNameS;
-        String submitFileUrl = submitUrl + "/" + submitFileNameS;
+        String txtFileUrl = txtUrl + txtFileNameS;
+        String submitFileUrl = submitUrl + submitFileNameS;
         Date date = new Date();
 //        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         /*
         submit多了type属性
          */
-        SubmitEntity submit = new SubmitEntity(sid, aid, fileType, assistTool.enum2Str(StateEnum.Submitted), submitFileUrl, txtFileUrl, assistTool.enum2Str(StateEnum.NotSubmitted), "0", "0", date);
+        SubmitEntity submit = new SubmitEntity(sid, aid, fileType, assistTool.enum2Str(StateEnum.Submitted), submitFileUrl, txtFileUrl, "", 0.0, 0.0, date);
         if (userDao.findSubmit(sid, aid) == null) {
             userDao.addSubmit(submit);
         } else {
@@ -174,7 +196,7 @@ public class StudentController {
 
         try {
             out = response.getWriter();
-            out.print("<script> window.location.href='/student/" + aid + "/assignment';</script>");
+            out.print("<script>alert('Submit success! ');window.location.href='/student/" + courseType + "/" + aid + "/assignmentInfo';</script>");
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
