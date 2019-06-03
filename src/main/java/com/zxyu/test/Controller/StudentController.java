@@ -196,7 +196,7 @@ public class StudentController {
 
         try {
             out = response.getWriter();
-            out.print("<script>alert('Submit success! ');window.location.href='/student/" + courseType + "/" + aid + "/assignmentInfo';</script>");
+            out.print("<script>alert('Submit success! ');window.location.href='/student/" +sid+"/"+ courseType + "/" + aid + "/assignmentInfo';</script>");
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();

@@ -92,12 +92,12 @@
                 <!--onclick="">-->
 
 
-                <a id="modal-modifyPwd" href="#modal-container-modifyPwd" role="button"
+                <a id="modal-submitAssignment" href="#modal-container-submitAssignment" role="button"
                    class="btn btn-primary"
                    data-toggle="modal" th:if="${ifCanSubmit}">Submit.</a>
-                <form class="form-class" id="form-publishShow" method="post"
+                <form class="form-class" id="form-submitAssignment" method="post"
                       enctype="multipart/form-data" action="/student/submitAssignment">
-                    <div class="modal fade" id="modal-container-modifyPwd" role="dialog"
+                    <div class="modal fade" id="modal-container-submitAssignment" role="dialog"
                          aria-labelledby="myModalLabel"
                          aria-hidden="true">
                         <div class="modal-dialog">
@@ -110,7 +110,7 @@
                                     </h4>
                                 </div>
                                 <div class="modal-body">
-                                    <div class="form-class" id="form-modifyPwd">
+                                    <div class="form-class" id="div-submitAssignment">
                                         <h2 class="form-class-heading">Add submit</h2>
 
                                         <table>
@@ -145,8 +145,6 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close
-                                    </button>
                                     <input type="submit" class="btn btn-primary" id="btn-addSubmit" value="Submit.">
                                 </div>
                             </div>

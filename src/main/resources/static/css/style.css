@@ -685,3 +685,8 @@ body {
 .sidebar{
     height: 900px;
 }
+
+
+.modal-backdrop {
+    z-index: 99;
+}

@@ -278,21 +278,29 @@ public class RootController {
             assignment.setState(assistTool.enum2Str(StateEnum.Scoring));
             userDao.updateAssignment(assignment);
 
+            //submit到spark平台
+            String submit_dirNow = tempUrl + innerUrl + "/"+assignment.getCtype()+"/"+aidNow+"/submit";
+            SubmitHelper submitHelper=new SubmitHelper(submit_dirNow,assignment.getOutpath());
+            submitHelper.submit();
+
             //run_score
             RunScoreHelper runScoreHelper = new RunScoreHelper(assignment.getOutpath(), assignment.getTestfile(), aidNow);
             //private 计算方法无法调用
+            runScoreHelper.calRunScore();
             List<Object[]> run_scores = runScoreHelper.getList();//aid,sid,score
             assistTool.updateScore(run_scores,aidNow,StateEnum.Run);
 
             //quality_score java
             String java_dirNow = tempUrl + innerUrl + "/"+assignment.getCtype()+"/"+aidNow+"/txt/java";
             JavaQualityHelper javaQualityHelper = new JavaQualityHelper(java_dirNow);
+            javaQualityHelper.calJavaQuality();
             List<Object[]> java_scores=javaQualityHelper.getList();
             assistTool.updateScore(java_scores,aidNow,StateEnum.Quality);
 
             //quality_score python
             String py_dirNow = tempUrl + innerUrl + "/"+assignment.getCtype()+"/"+aidNow+"/txt/python";
             PyQualityHelper pyQualityHelper = new PyQualityHelper(py_dirNow);
+            pyQualityHelper.calPyQuality();
             List<Object[]> py_scores=pyQualityHelper.getList();
             assistTool.updateScore(py_scores,aidNow,StateEnum.Quality);
 

@@ -133,4 +133,38 @@ public class MainController {
         }
     }
 
+    @RequestMapping(value="/modifyPassword", method = RequestMethod.POST)
+    public void modifyPwd(@RequestParam("pwdNew") String pwdNew,
+                          @RequestParam("pwdAgain") String pwdAgain,
+                          HttpServletRequest request, HttpServletResponse response) {
+        HttpSession session = request.getSession();
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
+        PrintWriter out = null;
+
+        String sid=String.valueOf(session.getAttribute("sid"));
+        UserEntity user=userDao.findUser(sid);
+        if(pwdNew.equals(pwdAgain)){
+            user.setPassword(pwdNew);
+            userDao.updateUser(user);
+            try {
+                out = response.getWriter();
+                out.print("<script>alert('Modify success! ');window.location.href='/student/" + sid + "/course';</script>");
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else{
+            try {
+                out = response.getWriter();
+                out.print("<script>alert('Password mismatch! ');" +
+                        "window.location.href='#';</script>");
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 }
