@@ -11,7 +11,7 @@ public class SubmitHelper {
         this.outdir=outdir;
     }
 
-    private void submit(){
+    public void submit(){
         File file=new File(dir);
         File[]tmplist=file.listFiles();
         System.out.println(tmplist.length);

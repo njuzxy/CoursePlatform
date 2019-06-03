@@ -28,7 +28,7 @@ public class MyLauncher {
                launcher.setAppResource(path);
                //launcher.setDeployMode("cluster");
                if(!args[0].equals("python"))
-                launcher.setMainClass("JavaSparkDemo");
+                launcher.setMainClass("Main");
                launcher.setMaster("spark://172.19.241.248:7077");
                launcher.setVerbose(true);
         SparkAppHandle handle=launcher.startApplication(new SparkAppHandle.Listener() {

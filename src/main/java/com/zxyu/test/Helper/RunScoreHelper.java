@@ -19,7 +19,7 @@ public class RunScoreHelper {
         list=new ArrayList<>();
     }
 
-    private void calRunScore(){
+    public void calRunScore(){
         List<String> result=new ArrayList<>();
         File test_file=new File(testfile);
         try {
