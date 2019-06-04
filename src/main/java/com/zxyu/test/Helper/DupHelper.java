@@ -10,8 +10,8 @@ import java.util.List;
 public class DupHelper {
 
     private int aid;
-    private  String OutPutparentPath="i:\\dup\\";
-    private  String InPutparentPath="i:\\src_text\\";
+    private  String OutPutparentPath;
+    private  String InPutparentPath;
     private String pyInPut;
     private String javaInput;
     private String pyOutPut;
@@ -24,12 +24,12 @@ public class DupHelper {
      public DupHelper(String OutPutParentPath,String InputParentPath,int aid){
          this.OutPutparentPath=OutPutParentPath;
          this.InPutparentPath=InputParentPath;
-        this.aid=aid;
-        this.pyInPut=InPutparentPath+aid+"\\python";
-        this.javaInput=InPutparentPath+aid+"\\java";
-        this.pyOutPut=OutPutparentPath+aid+"\\python_"+aid+".txt";
-        this.javaOutPut=OutPutparentPath+aid+"\\java_"+aid+".txt";
-        result=new ArrayList();
+         this.aid=aid;
+         this.pyInPut=InPutparentPath+aid+"\\txt\\python";
+         this.javaInput=InPutparentPath+aid+"\\txt\\java";
+         this.pyOutPut=OutPutparentPath+aid+"\\python_dup.txt";
+         this.javaOutPut=OutPutparentPath+aid+"\\java_dup.txt";
+         result=new ArrayList();
     }
 
     public List<DuplicateEntity> getResult() {
