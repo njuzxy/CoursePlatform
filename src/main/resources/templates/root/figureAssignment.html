@@ -64,7 +64,7 @@
                     </thead>
                     <tbody id="tbody-published">
                     <tr th:each="a : ${assignmentsPublished}">
-                        <td><input type="checkbox" name="figureAid" value="1" disabled="disabled"></td>
+                        <td><input type="checkbox" name="figureAid" th:value="${a.aid}" disabled="disabled"></td>
                         <td th:text="${a.aid}">1</td>
                         <td th:text="${a.ctype}">Cloud</td>
                         <td th:text="${a.title}">Assignment01</td>
@@ -74,7 +74,7 @@
                     </tbody>
                     <tbody id="tbody-end">
                     <tr th:each="a : ${assignmentsEnd}">
-                        <td><input type="checkbox" name="figureAid" value="1"></td>
+                        <td><input type="checkbox" name="figureAid" th:value="${a.aid}"></td>
                         <td th:text="${a.aid}">1</td>
                         <td th:text="${a.ctype}">Cloud</td>
                         <td th:text="${a.title}">Assignment01</td>
@@ -84,7 +84,7 @@
                     </tbody>
                     <tbody id="tbody-finished">
                     <tr th:each="a : ${assignmentsFinished}">
-                        <td><input type="checkbox" name="figureAid" value="1"></td>
+                        <td><input type="checkbox" name="figureAid" th:value="${a.aid}"></td>
                         <td th:text="${a.aid}">1</td>
                         <td th:text="${a.ctype}">Cloud</td>
                         <td th:text="${a.title}">Assignment01</td>
@@ -94,7 +94,7 @@
                     </tbody>
                     <tbody id="tbody-scoring">
                     <tr th:each="a : ${assignmentsScoring}">
-                        <td><input type="checkbox" name="figureAid" value="1" disabled="disabled"></td>
+                        <td><input type="checkbox" name="figureAid" th:value="${a.aid}"></td>
                         <td th:text="${a.aid}">1</td>
                         <td th:text="${a.ctype}">Cloud</td>
                         <td th:text="${a.title}">Assignment01</td>
@@ -104,7 +104,7 @@
                     </tbody>
                     <tbody id="tbody-scored">
                     <tr th:each="a : ${assignmentsScored}">
-                        <td><input type="checkbox" name="figureAid" value="1" disabled="disabled"></td>
+                        <td><input type="checkbox" name="figureAid" th:value="${a.aid}" disabled="disabled"></td>
                         <td th:text="${a.aid}">1</td>
                         <td th:text="${a.ctype}">Cloud</td>
                         <td th:text="${a.title}">Assignment01</td>

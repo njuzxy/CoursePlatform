@@ -264,8 +264,20 @@ public class RootController {
     @ResponseBody
     @RequestMapping(value = "/figureAssignmentsAct", method = RequestMethod.POST)
     public void figureAssignments(HttpServletRequest request,
-                                  HttpServletResponse response) throws Exception {
+                                  HttpServletResponse response){
         String[] figureAidsStr = request.getParameterValues("figureAid");
+        response.setCharacterEncoding("UTF-8");
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
+        PrintWriter out = null;
+        try {
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if(figureAidsStr.length==0){
+            out.print("<script>alert('Please choose assignment!');</script>");
+        }
         int[] figureAids = new int[figureAidsStr.length];
         for (int i = 0; i < figureAidsStr.length; i++) {
             figureAids[i] = Integer.parseInt(figureAidsStr[i]);
@@ -284,7 +296,7 @@ public class RootController {
             submitHelper.submit();
 
             //run_score
-            RunScoreHelper runScoreHelper = new RunScoreHelper(assignment.getOutpath(), assignment.getTestfile(), aidNow);
+            RunScoreHelper runScoreHelper = new RunScoreHelper(assignment.getOutpath(), tempUrl+assignment.getTestfile(), aidNow);
             //private 计算方法无法调用
             runScoreHelper.calRunScore();
             List<Object[]> run_scores = runScoreHelper.getList();//aid,sid,score
@@ -328,10 +340,6 @@ public class RootController {
             userDao.addNotices(notices);
         }
 
-        response.setCharacterEncoding("UTF-8");
-        response.setHeader("Content-type", "text/html;charset=UTF-8");
-        PrintWriter out = null;
-        out = response.getWriter();
         out.print("<script>alert('Figure assignments success!');" +
                 "window.location.href='/root/figureAssignments';</script>");
         out.flush();
