@@ -218,8 +218,8 @@ public class StudentController {
     @RequestMapping(value = "/downloadDetailedFile", method = RequestMethod.POST)
     public void downloadDetailFile(@RequestParam("urlDown") String urlDown, HttpServletRequest request, HttpServletResponse response) {
         System.out.println("*****************downloadFile");
-        String fileName = "test.txt";
-        String path = tempUrl + innerUrl;
+        String fileName = urlDown;
+//        String path = tempUrl + innerUrl;
 //   String path = request.getSession().getServletContext().getRealPath("/");
         //文件在项目的webapp 下面
 //   String fileName="guest_template.xls";   ///sstf-manager/src/main/webapp/guest_template.xls
@@ -230,7 +230,7 @@ public class StudentController {
         InputStream inputStream = null;
         try {
             //打开本地文件流
-            inputStream = new FileInputStream(path + fileName);
+            inputStream = new FileInputStream(fileName);
             //激活下载操作
             OutputStream os = response.getOutputStream();
             //循环写入输出流
