@@ -66,9 +66,16 @@
                             Detailed file:
                         </td>
                         <td>
-                            <input type="submit" href="#" class="btn btn-primary" id="btn-downloadDetailedFile"
-                                   value="Download."
-                                   th:onclick="|downloadDetailedFile(${assignment.getAid()})|"></td>
+                            <form method="post" action="/student/downloadDetailedFile">
+                                <input type="submit" class="btn btn-primary" id="btn-downloadDetailedFile"
+                                value="Download.">
+                                <input th:hidden="true" class="input-urlDown" type="text" name="urlDown" th:value="${assignment.getFile()}">
+                                <!--th:onclick="|downloadDetailedFile(${assignment.getAid()})|">-->
+                            </form>
+                        </td>
+
+
+
                     </tr>
                     <tr>
                         <td>
@@ -173,6 +180,7 @@
 <script type="text/javascript" th:inline="javascript">
 
     function downloadDetailedFile(aid) {
+        alert("YES!");
         $.ajax({
             type: "POST",
             data: {aid: aid},

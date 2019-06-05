@@ -690,3 +690,7 @@ body {
 .modal-backdrop {
     z-index: 99;
 }
+
+.input-urlDown{
+    max-width: 10px;
+}

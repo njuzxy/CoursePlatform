@@ -19,6 +19,7 @@ import java.io.*;
 import java.util.*;
 
 import static com.zxyu.test.Helper.AssistTool.innerUrl;
+import static com.zxyu.test.Helper.AssistTool.tempUrl;
 
 @Controller
 @EnableAutoConfiguration
@@ -94,14 +95,14 @@ public class StudentController {
         } else if (submit.getState().equals(assistTool.enum2Str(StateEnum.Scored))) {
             submitState = "Scored";
             score = "run : " + submit.getRun_score() + "  /  quality : " + submit.getQuality_score();
-        } else{
+        } else {
             submitState = "Scoring";
             score = "Waiting";
         }
 
         boolean ifCanSubmit = false;
-        if(assignment.getState().equals(assistTool.enum2Str(StateEnum.Published))){
-            ifCanSubmit=true;
+        if (assignment.getState().equals(assistTool.enum2Str(StateEnum.Published))) {
+            ifCanSubmit = true;
         }
 
 //        System.out.println(submitState + "         " + score);
@@ -147,6 +148,15 @@ public class StudentController {
         String courseType = String.valueOf(session.getAttribute("ctype"));
         int aid = Integer.parseInt(String.valueOf(session.getAttribute("aid")));
         String sid = String.valueOf(session.getAttribute("sid"));
+        if(sid.equals(null)){
+            try {
+                out = response.getWriter();
+                out.print("<script>alert('Please login first! ');</script>");
+                out.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         //test
 //        System.out.println(sid);
 
@@ -196,7 +206,7 @@ public class StudentController {
 
         try {
             out = response.getWriter();
-            out.print("<script>alert('Submit success! ');window.location.href='/student/" +sid+"/"+ courseType + "/" + aid + "/assignmentInfo';</script>");
+            out.print("<script>alert('Submit success! ');window.location.href='/student/" + sid + "/" + courseType + "/" + aid + "/assignmentInfo';</script>");
             out.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -204,10 +214,12 @@ public class StudentController {
 
     }
 
-    @RequestMapping("/downloadDetailFile")
-    public void downloadDetailFile(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        String fileName = "2DZ1832004.py";
-        String path = "/Users/apple/Documents/GitHub/CoursePlatform/src/main/java/com/zxyu/test/jars";
+    @ResponseBody
+    @RequestMapping(value = "/downloadDetailedFile", method = RequestMethod.POST)
+    public void downloadDetailFile(@RequestParam("urlDown") String urlDown, HttpServletRequest request, HttpServletResponse response) {
+        System.out.println("*****************downloadFile");
+        String fileName = "test.txt";
+        String path = tempUrl + innerUrl;
 //   String path = request.getSession().getServletContext().getRealPath("/");
         //文件在项目的webapp 下面
 //   String fileName="guest_template.xls";   ///sstf-manager/src/main/webapp/guest_template.xls
@@ -231,7 +243,13 @@ public class StudentController {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (inputStream != null) inputStream.close();
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 

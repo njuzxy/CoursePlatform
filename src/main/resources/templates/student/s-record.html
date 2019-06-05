@@ -32,8 +32,8 @@
                     <thead>
                     <tr>
                         <th>Aid</th>
-                        <th>Ctype</th>
-                        <th>Title</th>
+                        <th>Language</th>
+                        <th>State</th>
                         <th>Time</th>
                         <th>Submit</th>
                     </tr>
@@ -57,11 +57,16 @@
 
                     <tr th:each="r : ${records}">
                         <td th:text="${r.aid}">1</td>
-                        <td>ctype</td>
-                        <td>title</td>
+                        <td th:text="${r.language}">language</td>
+                        <td th:text="${r.state}">state</td>
                         <td th:text="${r.time}">2019-03-10 17:13:34</td>
                         <td>
-                            <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                            <form method="post" action="/student/downloadDetailedFile">
+                                <input type="submit" class="btn btn-primary" id="btn-downloadDetailedFile"
+                                       value="Download.">
+                                <input th:hidden="true" class="input-urlDown" type="text" name="urlDown" th:value="${r.file}">
+                            </form>
+                            <!--<input type="button" href="#" class="btn btn-primary" value="Download." onclick="">-->
                     </tr>
 
                     </tbody>

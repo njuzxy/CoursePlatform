@@ -65,18 +65,24 @@
                             Detailed file:
                         </td>
                         <td>
-                            <input type="button" href="#" class="btn btn-primary" id="btn-downloadDetailedFile"
-                                   value="Download."
-                                   onclick=""></td>
+                            <form method="post" action="/student/downloadDetailedFile">
+                                <input type="submit" class="btn btn-primary"
+                                       value="Download.">
+                                <input th:hidden="true" class="input-urlDown" type="text" name="urlDown" th:value="${assignment.file}">
+                            </form>
+                        </td>
                     </tr>
                     <tr>
                         <td>
                             Test file:
                         </td>
                         <td>
-                            <input type="button" href="#" class="btn btn-primary" id="btn-downloadTestFile"
-                                   value="Download."
-                                   onclick=""></td>
+                            <form method="post" action="/student/downloadDetailedFile">
+                                <input type="submit" class="btn btn-primary"
+                                       value="Download.">
+                                <input th:hidden="true" class="input-urlDown" type="text" name="urlDown" th:value="${assignment.testfile}">
+                            </form>
+                        </td>
                     </tr>
 
                 </table>
@@ -133,10 +139,18 @@
                                 <td th:text="${s.run_score}"></td>
                                 <td th:text="${s.quality_score}"></td>
                                 <td>
-                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                    <form method="post" action="/student/downloadDetailedFile">
+                                        <input type="submit" class="btn btn-primary"
+                                               value="Download.">
+                                        <input th:hidden="true" class="input-urlDown" type="text" name="urlDown" th:value="${s.text_file}">
+                                    </form>
                                 </td>
                                 <td>
-                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
+                                    <form method="post" action="/student/downloadDetailedFile">
+                                        <input type="submit" class="btn btn-primary"
+                                               value="Download.">
+                                        <input th:hidden="true" class="input-urlDown" type="text" name="urlDown" th:value="${s.file}">
+                                    </form>
                                 </td>
                             </tr>
 
@@ -158,8 +172,8 @@
                                 <th>No.1 aid</th>
                                 <th>No.2 sid</th>
                                 <th>similar percent</th>
-                                <th>No.1 submit</th>
-                                <th>No.2 submit</th>
+                                <!--<th>No.1 submit</th>-->
+                                <!--<th>No.2 submit</th>-->
                             </tr>
                             </thead>
                             <tbody id="tbody-duplicateDetail">
@@ -204,12 +218,12 @@
                                 <td th:text="${d.sid}"></td>
                                 <td th:text="${d.similar_sid}"></td>
                                 <td th:text="${d.s_percent}"></td>
-                                <td>
-                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
-                                </td>
-                                <td>
-                                    <input type="button" href="#" class="btn btn-primary" value="Download." onclick="">
-                                </td>
+                                <!--<td>-->
+                                    <!--<input type="button" href="#" class="btn btn-primary" value="Download." onclick="">-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--<input type="button" href="#" class="btn btn-primary" value="Download." onclick="">-->
+                                <!--</td>-->
                             </tr>
 
                             </tbody>
