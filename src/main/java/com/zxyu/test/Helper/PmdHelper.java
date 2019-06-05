@@ -4,12 +4,16 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -78,7 +82,10 @@ public class PmdHelper {
     public int getScore(){
         Set<String> ruleSet=new HashSet<String>() ;
         try {
-            document=db.parse(outputPath);
+            //document=db.parse(outputPath);
+            BufferedReader br=new BufferedReader(new InputStreamReader(new FileInputStream(outputPath),"utf-8"));
+            InputSource is=new InputSource(br);
+            document=db.parse(is);
             NodeList violationList=document.getElementsByTagName("violation");
             Node node;
             String rule="";

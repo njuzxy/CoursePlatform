@@ -16,15 +16,9 @@ public class PyQualityHelper {
 
     public void calPyQuality() {
         File file = new File(dir);
-        File outDir = file.getParentFile().listFiles()[2];
-        //int aid=file.getParentFile();
-        //System.out.println(outDir.getAbsolutePath());
-
-        int aid = Integer.parseInt(file.getParentFile().getParentFile().listFiles()[0].getName());
-        //System.out.println(aid);
+        File outDir = new File(file.getParent(),"pythonquality");
+        int aid = Integer.parseInt(file.getParentFile().getParentFile().getName());
         File[] pythonList = file.listFiles();
-        String s = file.getName();
-        //System.out.println(s);
         String fileName;
         String sid;
         for (int i = 0; i < pythonList.length; i++) {
@@ -32,7 +26,6 @@ public class PyQualityHelper {
                 continue;
             fileName = pythonList[i].getName();
             sid = fileName.substring(0, fileName.lastIndexOf("."));
-            //System.out.println(sid);
             PylintHelper helper = new PylintHelper(dir + "\\" + fileName, confPath, outDir.getAbsolutePath() + "\\" + sid + ".txt");
             helper.execPylint();
             Object[] pythonQ = new Object[3];
@@ -49,7 +42,7 @@ public class PyQualityHelper {
     }
 
     public static void main(String args[]){
-        PyQualityHelper helper=new PyQualityHelper("I:\\src_text\\1\\python");
+        PyQualityHelper helper=new PyQualityHelper(System.getProperty("user.dir")+"\\src\\main\\java\\com\\zxyu\\test\\jars\\云计算\\0\\txt\\python");
         helper.calPyQuality();
         System.out.println(helper.getList().size());
         System.out.println(helper.getList().get(0)[2]);

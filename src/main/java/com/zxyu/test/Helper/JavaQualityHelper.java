@@ -18,15 +18,9 @@ public class JavaQualityHelper {
 
     public void calJavaQuality(){
         File file=new File(dir);
-        File outDir=file.getParentFile().listFiles()[2];
-        //int aid=file.getParentFile();
-        System.out.println(outDir.getAbsolutePath());
-
-        int aid=Integer .parseInt(file.getParentFile().getParentFile().listFiles()[0].getName());
-        System.out.println(aid);
+        File outDir=new File(file.getParent(),"javaquality");
+        int aid=Integer .parseInt(file.getParentFile().getParentFile().getName());
         File[]javaList=file.listFiles();
-        String s=file.getName();
-        System.out.println(s);
         String fileName;
         String sid;
         for(int i=0;i<javaList.length;i++){
@@ -34,7 +28,6 @@ public class JavaQualityHelper {
                 continue;
             fileName=javaList[i].getName();
             sid=fileName.substring(0,fileName.lastIndexOf("."));
-            System.out.println(sid);
             PmdHelper helper=new PmdHelper(dir+"\\"+fileName,outDir.getAbsolutePath()+"\\"+sid+".xml",rulePath);
             helper.execPmd();
             Object[] javaQ=new Object[3];
@@ -50,9 +43,9 @@ public class JavaQualityHelper {
     }
 
     public static void main(String args[]){
-        JavaQualityHelper helper=new JavaQualityHelper("I:\\src_text\\1\\java");
+        JavaQualityHelper helper=new JavaQualityHelper(System.getProperty("user.dir")+"\\src\\main\\java\\com\\zxyu\\test\\jars\\云计算\\0\\txt\\java");
         helper.calJavaQuality();
         System.out.println(helper.getList().size());
-        System.out.println(helper.getList().get(0)[0]);
+        System.out.println(helper.getList().get(0)[2]);
     }
 }
