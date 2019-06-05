@@ -217,20 +217,22 @@ public class StudentController {
     @ResponseBody
     @RequestMapping(value = "/downloadDetailedFile", method = RequestMethod.POST)
     public void downloadDetailFile(@RequestParam("urlDown") String urlDown, HttpServletRequest request, HttpServletResponse response) {
-        System.out.println("*****************downloadFile");
-        String fileName = urlDown;
+        System.out.println("*****************downloadFile url: "+urlDown);
+        String[] splitStr=urlDown.split("/");
+        String fileName = splitStr[splitStr.length-1];
+        System.out.println("*****************downloadFile fileName: "+fileName);
 //        String path = tempUrl + innerUrl;
-//   String path = request.getSession().getServletContext().getRealPath("/");
-        //文件在项目的webapp 下面
-//   String fileName="guest_template.xls";   ///sstf-manager/src/main/webapp/guest_template.xls
         //设置响应头和客户端保存文件名
-        response.setCharacterEncoding("utf-8");
         response.setContentType("multipart/form-data");
-        response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+        try {
+            response.addHeader("Content-Disposition", "attachment;filename=" + new String(fileName.getBytes("utf-8"),"ISO8859-1"));
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         InputStream inputStream = null;
         try {
             //打开本地文件流
-            inputStream = new FileInputStream(tempUrl+fileName);
+            inputStream = new FileInputStream(tempUrl+urlDown);
             //激活下载操作
             OutputStream os = response.getOutputStream();
             //循环写入输出流
