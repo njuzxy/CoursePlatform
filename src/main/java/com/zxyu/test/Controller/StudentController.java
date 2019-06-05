@@ -230,7 +230,7 @@ public class StudentController {
         InputStream inputStream = null;
         try {
             //打开本地文件流
-            inputStream = new FileInputStream(fileName);
+            inputStream = new FileInputStream(tempUrl+fileName);
             //激活下载操作
             OutputStream os = response.getOutputStream();
             //循环写入输出流
