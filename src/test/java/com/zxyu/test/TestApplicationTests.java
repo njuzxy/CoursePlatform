@@ -58,17 +58,9 @@ public class TestApplicationTests {
         userDao.updateSubmit(submitEntity);
     }*/
 
-    @Test
-    public void TestFindSubmit()throws Exception{
-        SubmitEntity submitEntity=userDao.findSubmit("151250199",1);
-        System.out.println(submitEntity.getLanguage());
-    }
 
-    @Test
-    public void TestAddAssignment()throws Exception{
-        AssignmentEntity assignmentEntity=new AssignmentEntity(userDao.findCourseNextAid(),"assignment01","云计算","简介","test","file","testfile","");
-        userDao.addAssignment(assignmentEntity);
-    }
+
+
 
     @Test
     public void TestAddDuplicate()throws Exception{
@@ -105,21 +97,9 @@ public class TestApplicationTests {
         System.out.println(list.size());
     }
 
-    @Test
-    public void TestMyLauncher()throws Exception{
-        String[]input=new String[2];
-        input[0]="python";
-        input[1]="i:\\testpy.py";
-        MyLauncher.main(input);
-    }
 
-    @Test
-    public void TestRemoteCmd()throws Exception{
-        String[]input=new String[2];
-        input[0]="python";
-        input[1]="/home/spark/file/testpy.py";
-        RemoteCmd.main(input);
-    }
+
+
 
 
 }
